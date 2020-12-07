@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
 @Table(name="learning_activity")
-public class Learning_Activity {
+public class LearningActivity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -27,7 +27,7 @@ public class Learning_Activity {
 	@Column(name="activity_realsedate")
 	private LocalDate activity_realsedate;
 	@Column(name="assesment")
-	private Assesment assesment;
+	private Assessment assesment;
 	public Integer getId() {
 		return id;
 	}
@@ -64,21 +64,21 @@ public class Learning_Activity {
 	public void setActivity_realsedate(LocalDate activity_realsedate) {
 		this.activity_realsedate = activity_realsedate;
 	}
-	public Assesment getAssesment() {
+	public Assessment getAssesment() {
 		return assesment;
 	}
-	public void setAssesment(Assesment assesment) {
+	public void setAssesment(Assessment assesment) {
 		this.assesment = assesment;
 	}
 	
 	//No argument constructor
-	public Learning_Activity() {
+	public LearningActivity() {
 		
 	}
 	
 	//All arguments constructor
-	public Learning_Activity(Integer id, String activity_name, String activity_link, String activity_level, Time activity_time,
-			LocalDate activity_realsedate, Assesment assesment) {
+	public LearningActivity(Integer id, String activity_name, String activity_link, String activity_level, Time activity_time,
+			LocalDate activity_realsedate, Assessment assesment) {
 		super();
 		this.id = id;
 		this.activity_name = activity_name;

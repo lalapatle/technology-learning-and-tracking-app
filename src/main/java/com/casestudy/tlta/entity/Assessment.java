@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="assesment_activity")
-public class Assesment {
+public class Assessment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -60,12 +60,12 @@ public class Assesment {
 	}
 	
 	// No argument constructor
-	public Assesment() {
+	public Assessment() {
 		
 	}
 	
 	// All argument constructor
-	public Assesment(Integer id, String assesment_name, String assesment_type, LocalDate assesment_release_date,
+	public Assessment(Integer id, String assesment_name, String assesment_type, LocalDate assesment_release_date,
 			Time assesment_time_duration) {
 		super();
 		this.id = id;
