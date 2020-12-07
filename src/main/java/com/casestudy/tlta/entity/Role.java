@@ -2,7 +2,11 @@ package com.casestudy.tlta.entity;
 
 public enum Role {
 	USER("User"),
+
+	
+
 	MODERATOR("Moderator") ,
+
 	ADMIN("Admin");
 	
 private String role;

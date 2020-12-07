@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
 @Table(name="learning_activity")
-public class Learning_Activity {
+public class Activity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -72,12 +72,12 @@ public class Learning_Activity {
 	}
 	
 	//No argument constructor
-	public Learning_Activity() {
+	public Activity() {
 		
 	}
 	
 	//All arguments constructor
-	public Learning_Activity(Integer id, String activity_name, String activity_link, String activity_level, Time activity_time,
+	public Activity(Integer id, String activity_name, String activity_link, String activity_level, Time activity_time,
 			LocalDate activity_realsedate, Assesment assesment) {
 		super();
 		this.id = id;
