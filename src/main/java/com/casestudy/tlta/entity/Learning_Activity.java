@@ -10,18 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name="activity_table")
-public class Activity {
+@Table(name="learning_activity")
+public class Learning_Activity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="activity_id")
-	private Integer activity_id;
+	@Column(name="id")
+	private Integer id;
+	@Column(name = "activity_name")
+	private String activity_name;
 	@Column(name="activity_link")
 	private String activity_link;
-	@Column(name="activity_point")
-	private String activity_point;
-	@Column(name="activity_type")
-	private String activity_type;
 	@Column(name="activity_level")
 	private String activity_level;
 	@Column(name="activity_time")
@@ -30,31 +28,23 @@ public class Activity {
 	private LocalDate activity_realsedate;
 	@Column(name="assesment")
 	private Assesment assesment;
-
-
-	public Integer getActivity_id() {
-		return activity_id;
+	public Integer getId() {
+		return id;
 	}
-	public void setActivity_id(Integer activity_id) {
-		this.activity_id = activity_id;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getActivity_name() {
+		return activity_name;
+	}
+	public void setActivity_name(String activity_name) {
+		this.activity_name = activity_name;
 	}
 	public String getActivity_link() {
 		return activity_link;
 	}
 	public void setActivity_link(String activity_link) {
 		this.activity_link = activity_link;
-	}
-	public String getActivity_point() {
-		return activity_point;
-	}
-	public void setActivity_point(String activity_point) {
-		this.activity_point = activity_point;
-	}
-	public String getActivity_type() {
-		return activity_type;
-	}
-	public void setActivity_type(String activity_type) {
-		this.activity_type = activity_type;
 	}
 	public String getActivity_level() {
 		return activity_level;
@@ -80,31 +70,35 @@ public class Activity {
 	public void setAssesment(Assesment assesment) {
 		this.assesment = assesment;
 	}
-
-	public Activity() {
-
+	
+	//No argument constructor
+	public Learning_Activity() {
+		
 	}
-
-
-	public Activity(Integer activity_id, String activity_link, String activity_point, String activity_type,
-			String activity_level, Time activity_time, LocalDate activity_realsedate, Assesment assesment) {
+	
+	//All arguments constructor
+	public Learning_Activity(Integer id, String activity_name, String activity_link, String activity_level, Time activity_time,
+			LocalDate activity_realsedate, Assesment assesment) {
 		super();
-		this.activity_id = activity_id;
+		this.id = id;
+		this.activity_name = activity_name;
 		this.activity_link = activity_link;
-		this.activity_point = activity_point;
-		this.activity_type = activity_type;
 		this.activity_level = activity_level;
 		this.activity_time = activity_time;
 		this.activity_realsedate = activity_realsedate;
 		this.assesment = assesment;
 	}
+	
+	// toString method
 	@Override
 	public String toString() {
-		return "Activity [activity_id=" + activity_id + ", activity_link=" + activity_link + ", activity_point="
-				+ activity_point + ", activity_type=" + activity_type + ", activity_level=" + activity_level
-				+ ", activity_time=" + activity_time + ", activity_realsedate=" + activity_realsedate + ", assesment="
-				+ assesment + "]";
+		return "Activity [id=" + id + ", activity_name=" + activity_name + ", activity_link=" + activity_link
+				+ ", activity_level=" + activity_level + ", activity_time=" + activity_time + ", activity_realsedate="
+				+ activity_realsedate + ", assesment=" + assesment + "]";
 	}
+
+
+	
 
 
 
