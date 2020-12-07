@@ -27,7 +27,7 @@ public class Activity {
 	@Column(name="activity_realsedate")
 	private LocalDate activity_realsedate;
 	@Column(name="assesment")
-	private Assesment assesment;
+	private Assessment assesment;
 	public Integer getId() {
 		return id;
 	}
@@ -64,10 +64,10 @@ public class Activity {
 	public void setActivity_realsedate(LocalDate activity_realsedate) {
 		this.activity_realsedate = activity_realsedate;
 	}
-	public Assesment getAssesment() {
+	public Assessment getAssesment() {
 		return assesment;
 	}
-	public void setAssesment(Assesment assesment) {
+	public void setAssesment(Assessment assesment) {
 		this.assesment = assesment;
 	}
 	
@@ -78,7 +78,7 @@ public class Activity {
 	
 	//All arguments constructor
 	public Activity(Integer id, String activity_name, String activity_link, String activity_level, Time activity_time,
-			LocalDate activity_realsedate, Assesment assesment) {
+			LocalDate activity_realsedate, Assessment assesment) {
 		super();
 		this.id = id;
 		this.activity_name = activity_name;
