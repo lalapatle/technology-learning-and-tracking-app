@@ -3,6 +3,7 @@
 	<persistence-unit name="technology-learning-and-tracking-app">
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	<class>com.casestudy.tlta.entity.Activity</class>
+	<class>com.casestudy.tlta.entity.Assesment</class>
 	<class>com.casestudy.tlta.entity.Login</class>
 	<properties>
 			<property name="javax.persistence.jdbc.url"
