@@ -1,35 +1,62 @@
 package com.casestudy.tlta.entity;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="login")
-public class Login {
+@Table(name="register_user")
+public class RegisterUser {
 	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name = "first_name")
 	private String firstName;
+	
 	@Column(name = "last_name")
 	private String lastName;
+	
 	@Column(name = "email")
 	private String emailId;
+	
+	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "role")
+	@Enumerated(EnumType.ORDINAL)
 	private Role role;
 	
-	public Login() {
+	@OneToMany(mappedBy = "login")
+	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
+	
+	public Set<UserActivity> getUserActivity(){
+		return userActivity;
+	}
+	
+	public void setUserActivity(Set<UserActivity> groups) {
+		this.userActivity = groups;
+	}
+	
+	public void addUserActivity(UserActivity userActivity) {
+		this.userActivity.add(userActivity);
+	}
+	
+	public RegisterUser() {
 		
 	}
 	
-	public Login(String firstName, String lastName, String emailId,String password,Role role) {
+	public RegisterUser(String firstName, String lastName, String emailId,String password,Role role) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -54,7 +81,7 @@ public class Login {
 		this.role = role;
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 	public void setId(Integer id) {
@@ -78,6 +105,8 @@ public class Login {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
+	
+	
 	
 
 }
