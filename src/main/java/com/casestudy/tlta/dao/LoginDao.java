@@ -12,7 +12,7 @@ public interface LoginDao {
 	public Login getUserById(Integer id) throws PersistenceException;
 	public Login getModeratorById(Integer id) throws PersistenceException;
 	public long deleteUser(Integer id) throws PersistenceException;
-	public Login updatePassword(Login login, String firstName, String lastName) throws PersistenceException;
+	public  Login updatePassword(Login login) throws PersistenceException ;
 	public Login updateFirstName(Login firstName) throws PersistenceException;
 	public Login updateLastName(Login lastName ) throws PersistenceException;
 }

@@ -15,4 +15,5 @@ public interface LoginBoundary {
 	public Login updatePassword(Login login, String firstName, String lastName) throws LoginException;
 	public Login updateFirstName(Login firstName) throws LoginException;
 	public Login updateLastName(Login lastName) throws LoginException;
+	
 }

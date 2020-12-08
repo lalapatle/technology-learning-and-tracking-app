@@ -79,12 +79,12 @@ public class LoginBoundaryImpl implements LoginBoundary{
 	}
 	
 
+	
 	@Override
-	public Login updatePassword(Login login, Login firstName, Login lastName) throws LoginException {
+	public Login updatePassword(Login login, String firstName, String lastName) throws LoginException {
 			try { 
 			if(firstName==firstName && lastName==lastName){
-			Login updatedPassword= 
-			LoginDao.updatePassword(login);
+			Login updatedPassword= LoginDao.updatePassword(login);
 			}
 			return updatedPassword;
 			}catch(PersistenceException e) {
@@ -119,3 +119,5 @@ public class LoginBoundaryImpl implements LoginBoundary{
 
 
 
+
+}
