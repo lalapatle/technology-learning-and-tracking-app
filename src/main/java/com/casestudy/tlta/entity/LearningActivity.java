@@ -77,6 +77,7 @@ public class LearningActivity {
 	}
 	
 	//All arguments constructor
+
 	
 	
 	// toString method
@@ -88,6 +89,10 @@ public class LearningActivity {
 	}
 	public LearningActivity(Integer id, String activity_name, String[] activity_link, String activity_level,
 			Time activity_time, LocalDate activity_realsedate, Assessment assesment) {
+
+	public LearningActivity(Integer id, String activity_name, String[] activity_link, String activity_level, Time activity_time,
+			LocalDate activity_realsedate, Assessment assesment) {
+
 		super();
 		this.id = id;
 		this.activity_name = activity_name;
