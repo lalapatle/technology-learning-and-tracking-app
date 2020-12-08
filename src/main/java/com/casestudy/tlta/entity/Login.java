@@ -1,12 +1,14 @@
 package com.casestudy.tlta.entity;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-
 
 @Entity
 @Table(name="login")
@@ -24,6 +26,21 @@ public class Login {
 	private String emailId;
 	private String password;
 	private Role role;
+	
+	@OneToMany(mappedBy = "login")
+	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
+	
+	public Set<UserActivity> getUserActivity(){
+		return userActivity;
+	}
+	
+	public void setUserActivity(Set<UserActivity> groups) {
+		this.userActivity = groups;
+	}
+	
+	public void addUserActivity(UserActivity userActivity) {
+		this.userActivity.add(userActivity);
+	}
 	
 	public Login() {
 		
@@ -78,6 +95,8 @@ public class Login {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
+	
+	
 	
 
 }
