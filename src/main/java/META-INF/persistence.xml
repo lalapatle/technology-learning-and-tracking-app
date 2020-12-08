@@ -4,10 +4,10 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 	<class>com.casestudy.tlta.entity.Assessment</class>
-
 	<class>com.casestudy.tlta.entity.LearningActivity</class>
 	<class>com.casestudy.tlta.entity.UserActivity</class>
 	
+
 
 	<class>com.casestudy.tlta.entity.Login</class>
 	<properties>
