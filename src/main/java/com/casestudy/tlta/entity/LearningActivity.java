@@ -77,8 +77,22 @@ public class LearningActivity {
 	}
 	
 	//All arguments constructor
+
+	
+	
+	// toString method
+	@Override
+	public String toString() {
+		return "Activity [id=" + id + ", activity_name=" + activity_name + ", activity_link=" + activity_link
+				+ ", activity_level=" + activity_level + ", activity_time=" + activity_time + ", activity_realsedate="
+				+ activity_realsedate + ", assesment=" + assesment + "]";
+	}
+	public LearningActivity(Integer id, String activity_name, String[] activity_link, String activity_level,
+			Time activity_time, LocalDate activity_realsedate, Assessment assesment) {
+
 	public LearningActivity(Integer id, String activity_name, String[] activity_link, String activity_level, Time activity_time,
 			LocalDate activity_realsedate, Assessment assesment) {
+
 		super();
 		this.id = id;
 		this.activity_name = activity_name;
@@ -87,14 +101,6 @@ public class LearningActivity {
 		this.activity_time = activity_time;
 		this.activity_realsedate = activity_realsedate;
 		this.assesment = assesment;
-	}
-	
-	// toString method
-	@Override
-	public String toString() {
-		return "Activity [id=" + id + ", activity_name=" + activity_name + ", activity_link=" + activity_link
-				+ ", activity_level=" + activity_level + ", activity_time=" + activity_time + ", activity_realsedate="
-				+ activity_realsedate + ", assesment=" + assesment + "]";
 	}
 
 
