@@ -12,7 +12,7 @@ public interface LoginBoundary {
 	public Login getUserById(Integer id) throws LoginException;
 	public Login getModeratorById(Integer id) throws LoginException;
 	public long deleteUser(Integer id) throws LoginException;
-	public Login updatePassword(Login login, String firstName, String lastName) throws LoginException;
+	public Login updatePassword(Login login) throws LoginException;
 	public Login updateFirstName(Login firstName) throws LoginException;
 	public Login updateLastName(Login lastName) throws LoginException;
 	

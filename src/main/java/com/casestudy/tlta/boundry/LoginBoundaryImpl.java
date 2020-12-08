@@ -6,8 +6,6 @@ import com.casestudy.tlta.dao.LoginDao;
 import com.casestudy.tlta.dao.LoginDaoImpl;
 import com.casestudy.tlta.entity.Login;
 import com.casestudy.tlta.exception.LoginException;
-import com.cg.training.entity.Product;
-import com.cg.training.exception.ProductException;
 
 
 public class LoginBoundaryImpl implements LoginBoundary{
@@ -81,11 +79,11 @@ public class LoginBoundaryImpl implements LoginBoundary{
 
 	
 	@Override
-	public Login updatePassword(Login login, String firstName, String lastName) throws LoginException {
+	public Login updatePassword(Login login) throws LoginException {
 			try { 
-			if(firstName==firstName && lastName==lastName){
-			Login updatedPassword= LoginDao.updatePassword(login);
-			}
+			
+			Login updatedPassword= loginDao.updatePassword(login);
+			
 			return updatedPassword;
 			}catch(PersistenceException e) {
 			throw new LoginException(e.getMessage(),e);
