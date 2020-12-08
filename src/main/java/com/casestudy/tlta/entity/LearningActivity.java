@@ -20,7 +20,7 @@ public class LearningActivity {
 	@Column(name = "activity_name")
 	private String activity_name;
 	@Column(name = "activity_link")
-	private String[] activity_link;
+	private String activity_link;
 	@Column(name = "activity_level")
 	private String activity_level;
 	@Column(name = "activity_time")
@@ -46,11 +46,11 @@ public class LearningActivity {
 		this.activity_name = activity_name;
 	}
 
-	public String[] getActivity_link() {
+	public String getActivity_link() {
 		return activity_link;
 	}
 
-	public void setActivity_link(String[] activity_link) {
+	public void setActivity_link(String activity_link) {
 		this.activity_link = activity_link;
 	}
 
@@ -103,7 +103,7 @@ public class LearningActivity {
 
 	
 
-	public LearningActivity(Integer id, String activity_name, String[] activity_link, String activity_level,
+	public LearningActivity(Integer id, String activity_name, String activity_link, String activity_level,
 			Time activity_time, LocalDate activity_realsedate, Assessment assesment) {
 
 		super();

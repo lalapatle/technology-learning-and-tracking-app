@@ -22,29 +22,29 @@ public class LoginBoundaryImpl implements LoginBoundary{
 		
 	}
 
-	@Override
-	public void addModerator(Login login) throws LoginException {
-		try {
-			//validate product
-			loginDao.addModerator(login);			
-		}catch(PersistenceException e) {
-			throw new LoginException(e.getMessage(),e);
-		}
-		
-		
-	}
-
-	@Override
-	public void addAdmin(Login login) throws LoginException {
-		try {
-			//validate product
-			loginDao.addAdmin(login);			
-		}catch(PersistenceException e) {
-			throw new LoginException(e.getMessage(),e);
-		}
-		
-		
-	}
+//	@Override
+//	public void addModerator(Login login) throws LoginException {
+//		try {
+//			//validate product
+//			loginDao.addModerator(login);			
+//		}catch(PersistenceException e) {
+//			throw new LoginException(e.getMessage(),e);
+//		}
+//		
+//		
+//	}
+//
+//	@Override
+//	public void addAdmin(Login login) throws LoginException {
+//		try {
+//			//validate product
+//			loginDao.addAdmin(login);			
+//		}catch(PersistenceException e) {
+//			throw new LoginException(e.getMessage(),e);
+//		}
+//		
+//		
+//	}
 
 	@Override
 	public Login getUserById(Integer id) throws LoginException {
@@ -56,15 +56,15 @@ public class LoginBoundaryImpl implements LoginBoundary{
 		}
 	}
 
-	@Override
-	public Login getModeratorById(Integer id) throws LoginException {
-		try {			
-			Login login=loginDao.getModeratorById(id);
-			return login;
-		}catch(PersistenceException e) {
-			throw new LoginException(e.getMessage(),e);
-		}
-	}
+//	@Override
+//	public Login getModeratorById(Integer id) throws LoginException {
+//		try {			
+//			Login login=loginDao.getModeratorById(id);
+//			return login;
+//		}catch(PersistenceException e) {
+//			throw new LoginException(e.getMessage(),e);
+//		}
+//	}
 
 	@Override
 	public long deleteUser(Integer id) throws LoginException {
