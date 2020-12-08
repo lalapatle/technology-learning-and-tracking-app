@@ -1,6 +1,5 @@
 package com.casestudy.tlta.entity;
 
-import java.lang.annotation.Target;
 import java.sql.Time;
 import java.time.LocalDate;
 
