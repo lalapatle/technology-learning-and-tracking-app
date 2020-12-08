@@ -2,13 +2,21 @@ package com.casestudy.tlta.entity;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+
 @Entity
 @Table(name="learning_activity")
 public class LearningActivity {
@@ -26,8 +34,27 @@ public class LearningActivity {
 	private Time activity_time;
 	@Column(name="activity_realsedate")
 	private LocalDate activity_realsedate;
-	@Column(name="assesment")
+	
+	@OneToMany(mappedBy = "learningActivity")
+	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
+	
+	public Set<UserActivity> getUserActivity(){
+		return userActivity;
+	}
+	
+	public void setUserActivity(Set<UserActivity> groups) {
+		this.userActivity = groups;
+	}
+	
+	public void addUserActivity(UserActivity userActivity) {
+		this.userActivity.add(userActivity);
+	}
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="assesment_id")
 	private Assessment assesment;
+	
+	
 	public Integer getId() {
 		return id;
 	}
