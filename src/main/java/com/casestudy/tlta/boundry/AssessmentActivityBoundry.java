@@ -11,5 +11,5 @@ public interface AssessmentActivityBoundry {
 	public Integer deleteAssessmentActivity(Integer id) throws AssesmentException;
 	public List<Assessment> getAllAssessmentActivity() throws AssesmentException; 
 	public Assessment updateAssessmentActivity(Assessment assessmentActivity) throws AssesmentException;
-
+  
 }
