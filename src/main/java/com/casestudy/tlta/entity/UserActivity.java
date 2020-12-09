@@ -1,4 +1,3 @@
-
 package com.casestudy.tlta.entity;
 
 import javax.persistence.CascadeType;
@@ -12,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_activity")
+@Table(name = "users_activity")
 public class UserActivity {
 	
 	@Id
@@ -20,14 +19,14 @@ public class UserActivity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userActivityId;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "user_id")
 	private RegisterUser login;
 	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "activity_id")
-//	private LearningActivity learningActivity;
-//	
+	@ManyToOne()
+	@JoinColumn(name = "activity_id")
+	private LearningActivity learningActivity;
+
 	@Column(name = "status")
 	private String status = "register";
 	
@@ -50,13 +49,13 @@ public class UserActivity {
 		this.login = login;
 	}
 
-//	public LearningActivity getLearningActivity() {
-//		return learningActivity;
-//	}
-//
-//	public void setLearningActivity(LearningActivity learningActivity) {
-//		this.learningActivity = learningActivity;
-//	}
+	public LearningActivity getLearningActivity() {
+		return learningActivity;
+	}
+
+	public void setLearningActivity(LearningActivity learningActivity) {
+		this.learningActivity = learningActivity;
+	}
 
 	public String getStatus() {
 		return status;
@@ -73,6 +72,8 @@ public class UserActivity {
 	public void setCertificate(String certificate) {
 		this.certificate = certificate;
 	}
+
+	
 	
 	
 }

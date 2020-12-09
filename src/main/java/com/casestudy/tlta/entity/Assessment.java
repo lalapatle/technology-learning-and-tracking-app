@@ -1,10 +1,10 @@
-
 package com.casestudy.tlta.entity;
 import java.util.Date;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +38,8 @@ public class Assessment implements Serializable{
 	@Column(name="assesment_time_duration")
 	private Double assesment_time_duration;
 	
-	@OneToOne(mappedBy = "assesment")
+	
+	@OneToOne(mappedBy = "assesment",cascade=CascadeType.ALL)
     private LearningActivity learningActivity;
    
 	

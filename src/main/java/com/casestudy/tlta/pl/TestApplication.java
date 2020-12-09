@@ -14,10 +14,13 @@ import com.casestudy.tlta.boundry.LearningActivityBoundry;
 import com.casestudy.tlta.boundry.LearningActivityBoundryImpl;
 import com.casestudy.tlta.boundry.RegisterUserBoundary;
 import com.casestudy.tlta.boundry.RegisterUserBoundaryImpl;
+import com.casestudy.tlta.boundry.UserActivityBoundry;
+import com.casestudy.tlta.boundry.UserActivityBoundryImpl;
 import com.casestudy.tlta.entity.Assessment;
 import com.casestudy.tlta.entity.LearningActivity;
 import com.casestudy.tlta.entity.RegisterUser;
 import com.casestudy.tlta.entity.Role;
+import com.casestudy.tlta.entity.UserActivity;
 import com.casestudy.tlta.exception.ActivityException;
 import com.casestudy.tlta.exception.AssesmentException;
 import com.casestudy.tlta.exception.RegisterUserException;
@@ -28,12 +31,18 @@ public class TestApplication {
 	private static LearningActivityBoundry learningActivityBoundry = new LearningActivityBoundryImpl();
 	private static AssessmentActivityBoundry assessmentActivivtyBoundry = new AssessmentActivityBoundryImpl();
 	private static Logger plLogger = Logger.getLogger(TestApplication.class);
+	private static UserActivityBoundry userActivityBoundry=new UserActivityBoundryImpl();
 
 	public static void main(String[] args) throws NumberFormatException, RegisterUserException {
 
 		while (true) {
-			System.out.println(
-					"Enter 1.Login 2.Create(Admin/Moderator/User/Activity/Assessment) 3.Update(Admin/Moderator/User/Activity/Assessment) 4. Delete(Admin/Moderator/User/Activity/Assessment) 5. Search 6.View All");
+			System.out.println("Enter 1.Login"
+					+ "\n2.Create(Admin/Moderator/User/Ac7tivity/Assessment)"
+					+ "\n3.Update(Admin/Moderator/User/Activity/Assessment) "
+					+ "\n4. Delete(Admin/Moderator/User/Activity/Assessment)" 
+					+ "\n 5. Search "
+					+ "\n6.View All "
+					+ "\n7.User can register to activity ");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
@@ -82,8 +91,9 @@ public class TestApplication {
 					case 4:
 						learningActivity = new LearningActivity();
 						int id = addLearningActivity(learningActivity);
-						//System.out.println("New LEARNING ACTIVITY added successfully with id: " + id);
-						 plLogger.info(" learning activity added with id: "+id);
+						// System.out.println("New LEARNING ACTIVITY added successfully with id: " +
+						// id);
+						plLogger.info(" learning activity added with id: " + id);
 						break;
 					case 5:
 						assessment = new Assessment();
@@ -264,6 +274,15 @@ public class TestApplication {
 					}
 				}
 					break;
+				case 7:
+					System.out.println("Enter user Id:");
+					Integer userId = Integer.parseInt(scanner.nextLine());
+					System.out.println("Enter activity id: ");
+					Integer activityId = Integer.parseInt(scanner.nextLine());
+					UserActivity userActivity = new UserActivity();
+					Integer userActivityId = userRegisterToActivity(userActivity, userId, activityId);
+					System.out.println("User with id " + userId + " register activity with id: " + userActivityId);
+					break;
 
 				default:
 					plLogger.error("Invalid option");
@@ -271,10 +290,9 @@ public class TestApplication {
 
 				}
 
-			} catch(RegisterUserException|ActivityException| AssesmentException e) {
+			} catch (RegisterUserException | ActivityException | AssesmentException e) {
 				plLogger.error(e.getMessage());
-			}
-			catch(ParseException e) {
+			} catch (ParseException e) {
 				plLogger.error(e.getMessage());
 			}
 
@@ -283,10 +301,14 @@ public class TestApplication {
 			if (!ch.equalsIgnoreCase("y")) {
 				break;
 			}
-		
 
 		}
 
+	}
+
+	private static Integer userRegisterToActivity(UserActivity userActivity, Integer userId, Integer activityId)
+			throws ActivityException {
+		return userActivityBoundry.userRegisterToLearningActivity(userActivity, userId, activityId);
 	}
 
 	private static List<Assessment> getAllAssessment() throws AssesmentException {
@@ -409,7 +431,8 @@ public class TestApplication {
 
 	}
 
-	private static int addLearningActivity(LearningActivity learningActivity) throws ActivityException, ParseException, AssesmentException {
+	private static int addLearningActivity(LearningActivity learningActivity)
+			throws ActivityException, ParseException, AssesmentException {
 		System.out.println("Enter activity name: ");
 		learningActivity.setActivity_name(scanner.nextLine());
 		System.out.println("Enter activity link :");
