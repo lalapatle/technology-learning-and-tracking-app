@@ -48,24 +48,24 @@ public class LearningActivity implements Serializable{
 	@Column(name="activity_realsedate")
 	private Date activity_realsedate;
 	
-	@OneToOne
+	@OneToOne()
 	@JoinColumn(name="assesment_id")
 	private Assessment assesment;
 	
-//	@OneToMany(mappedBy = "learningActivity")
-//	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
-//	
-//	public Set<UserActivity> getUserActivity(){
-//		return userActivity;
-//	}
-//	
-//	public void setUserActivity(Set<UserActivity> groups) {
-//		this.userActivity = groups;
-//	}
-//	
-//	public void addUserActivity(UserActivity userActivity) {
-//		this.userActivity.add(userActivity);
-//	}
+	@OneToMany(mappedBy = "learningActivity",cascade = CascadeType.ALL)
+	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
+	
+	public Set<UserActivity> getUserActivity(){
+		return userActivity;
+	}
+	
+	public void setUserActivity(Set<UserActivity> groups) {
+		this.userActivity = groups;
+	}
+	
+	public void addUserActivity(UserActivity userActivity) {
+		this.userActivity.add(userActivity);
+	}
 
 	public Integer getId() {
 		return id;

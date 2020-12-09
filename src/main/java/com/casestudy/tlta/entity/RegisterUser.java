@@ -2,6 +2,7 @@ package com.casestudy.tlta.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,10 +35,10 @@ public class RegisterUser {
 	private String password;
 	
 	@Column(name = "role")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@OneToMany(mappedBy = "login")
+	@OneToMany(mappedBy = "login",cascade = CascadeType.ALL)
 	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
 	
 	public Set<UserActivity> getUserActivity(){

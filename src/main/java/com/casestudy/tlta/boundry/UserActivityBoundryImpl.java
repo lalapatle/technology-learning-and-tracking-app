@@ -32,4 +32,15 @@ public class UserActivityBoundryImpl implements UserActivityBoundry{
 			throw new ActivityException(e.getMessage(),e);
 		}
 	}
+	@Override
+	public Integer userRegisterToLearningActivity(UserActivity userActivity, Integer userId, Integer activityId)
+			throws ActivityException {
+		try {
+			Integer userActivityId = userActivityDao.userRegisterToLearningActivity(userActivity, userId, activityId);
+			return userActivityId;
+		}catch(PersistenceException p) {
+			throw new ActivityException(p.getMessage(),p);
+		}
+		
+	}
 }
