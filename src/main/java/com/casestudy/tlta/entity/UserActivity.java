@@ -23,10 +23,10 @@ public class UserActivity {
 	@JoinColumn(name = "user_id")
 	private RegisterUser login;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "activity_id")
-	private LearningActivity learningActivity;
-	
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "activity_id")
+//	private LearningActivity learningActivity;
+//	
 	@Column(name = "status")
 	private String status = "register";
 	
@@ -49,13 +49,13 @@ public class UserActivity {
 		this.login = login;
 	}
 
-	public LearningActivity getLearningActivity() {
-		return learningActivity;
-	}
-
-	public void setLearningActivity(LearningActivity learningActivity) {
-		this.learningActivity = learningActivity;
-	}
+//	public LearningActivity getLearningActivity() {
+//		return learningActivity;
+//	}
+//
+//	public void setLearningActivity(LearningActivity learningActivity) {
+//		this.learningActivity = learningActivity;
+//	}
 
 	public String getStatus() {
 		return status;
