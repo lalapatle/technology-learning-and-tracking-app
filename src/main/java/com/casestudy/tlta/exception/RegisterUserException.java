@@ -1,20 +1,20 @@
 package com.casestudy.tlta.exception;
 
-public class LoginException extends Exception{
+public class RegisterUserException extends Exception{
 private static final long serialVersionUID = 1L;
 	
 	private String message;
 
-	public LoginException() {
+	public RegisterUserException() {
 		
 	}
 
-	public LoginException(String message) {
+	public RegisterUserException(String message) {
 		super(message);
 		this.message=message;
 	}
 	
-	public LoginException(String message,Exception e) {
+	public RegisterUserException(String message,Exception e) {
 		super(message,e);
 		this.message=message;
 	}

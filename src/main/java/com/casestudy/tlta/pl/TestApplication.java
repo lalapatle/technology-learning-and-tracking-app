@@ -17,7 +17,7 @@ import com.casestudy.tlta.entity.RegisterUser;
 import com.casestudy.tlta.entity.Role;
 import com.casestudy.tlta.exception.ActivityException;
 import com.casestudy.tlta.exception.AssesmentException;
-import com.casestudy.tlta.exception.LoginException;
+import com.casestudy.tlta.exception.RegisterUserException;
 
 public class TestApplication {
 	private static Scanner scanner = new Scanner(System.in);
@@ -25,7 +25,7 @@ public class TestApplication {
 	private static LearningActivityBoundry learningActivityBoundry = new LearningActivityBoundryImpl();
 	private static AssessmentActivityBoundry assessmentActivivtyBoundry = new AssessmentActivityBoundryImpl();
 
-	public static void main(String[] args) throws NumberFormatException, LoginException {
+	public static void main(String[] args) throws NumberFormatException, RegisterUserException {
 
 		while (true) {
 			System.out.println(
@@ -278,7 +278,7 @@ public class TestApplication {
 
 	}
 
-	private static RegisterUser checkValid(Integer id, String password) throws LoginException {
+	private static RegisterUser checkValid(Integer id, String password) throws RegisterUserException {
 		// TODO Auto-generated method stub
 		RegisterUser obj = loginBoundry.getUserById(id);
 		if (obj == null) {
@@ -291,14 +291,14 @@ public class TestApplication {
 		return null;
 	}
 
-	private static RegisterUser getUserById(Integer userId) throws LoginException {
+	private static RegisterUser getUserById(Integer userId) throws RegisterUserException {
 
 		// TODO Auto-generated method stub
 		return loginBoundry.getUserById(userId);
 
 	}
 
-	private static void addPerson(RegisterUser login) throws LoginException {
+	private static void addPerson(RegisterUser login) throws RegisterUserException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter First name");
 		login.setFirstName(scanner.nextLine());
@@ -334,12 +334,12 @@ public class TestApplication {
 
 	}
 
-	private static Integer deleteUser(Integer id) throws LoginException {
+	private static Integer deleteUser(Integer id) throws RegisterUserException {
 		return loginBoundry.deleteUser(id);
 
 	}
 
-	private static void updateLastName() throws LoginException {
+	private static void updateLastName() throws RegisterUserException {
 		System.out.println("Your ID to update Last name is: ");
 		Integer id = Integer.parseInt(scanner.nextLine());
 		RegisterUser obj = loginBoundry.getUserById(id);
@@ -353,7 +353,7 @@ public class TestApplication {
 		}
 	}
 
-	private static void updateFirstName() throws LoginException {
+	private static void updateFirstName() throws RegisterUserException {
 		System.out.println("Your ID to update First name is: ");
 		Integer id = Integer.parseInt(scanner.nextLine());
 		RegisterUser obj = loginBoundry.getUserById(id);
@@ -368,7 +368,7 @@ public class TestApplication {
 
 	}
 
-	private static void updatePassword() throws LoginException {
+	private static void updatePassword() throws RegisterUserException {
 		System.out.println("Your ID to update password is: ");
 		Integer id = Integer.parseInt(scanner.nextLine());
 		RegisterUser obj = loginBoundry.getUserById(id);
