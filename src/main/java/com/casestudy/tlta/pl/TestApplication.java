@@ -29,22 +29,26 @@ public class TestApplication {
 
 		while (true) {
 			System.out.println(
-					"Enter 1.RegisterUser() 2.Create(Admin/Moderator/User/Activity/Assessment/) 3.Update(Admin/Moderator/User) 4. Delete(Admin/Moderator/User) 5. Search");
+					"Enter 1.Login 2.Create(Admin/Moderator/User/Activity/Assessment) 3.Update(Admin/Moderator/User/Activity/Assessment) 4. Delete(Admin/Moderator/User/Activity/Assessment) 5. Search");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
 			LearningActivity learningActivity = null;
 			try {
 				switch (option) {
-//                case 1: {
-//                    System.out.println("Enter your ID and Password:");
-//                    Integer id = Integer.parseInt(scanner.nextLine());
-//                    String password = scanner.nextLine();
-//                }
-//
-// 
-//
-//                    break;
+				case 1: {
+					System.out.println("Enter your ID and Password:");
+					Integer id = Integer.parseInt(scanner.nextLine());
+					String password = scanner.nextLine();
+					RegisterUser logn = checkValid(id, password);
+					if (logn != null) {
+						System.out.println("Login successfully");
+					} else {
+						System.out.println("Invalid ID or Password");
+					}
+				}
+
+					break;
 				case 2: {
 					System.out.println("Create 1. Admin 2. User 3.Moderator 4. Activity 5. Assessment");
 					int choice = Integer.parseInt(scanner.nextLine());
@@ -99,19 +103,19 @@ public class TestApplication {
 						choice = Integer.parseInt(scanner.nextLine());
 						switch (choice) {
 						case 1:
-							login = new RegisterUser();
-							updatePassword(login);
-							System.out.println("Password changed successfully");
+
+							updatePassword();
+
 							break;
 						case 2:
-							login = new RegisterUser();
-							updateFirstName(login);
-							System.out.println("First name changed successfully");
+
+							updateFirstName();
+
 							break;
 						case 3:
-							login = new RegisterUser();
-							updateLastName(login);
-							System.out.println("Last name changed successfully");
+
+							updateLastName();
+
 							break;
 						default:
 							System.out.println("Invalid option");
@@ -122,46 +126,48 @@ public class TestApplication {
 						choice = Integer.parseInt(scanner.nextLine());
 						switch (choice) {
 						case 1:
-							login = new RegisterUser();
-							updatePassword(login);
-							System.out.println("Password changed successfully");
+
+							updatePassword();
+
 							break;
 						case 2:
-							login = new RegisterUser();
-							updateFirstName(login);
-							System.out.println("First name changed successfully");
+
+							updateFirstName();
+
 							break;
 						case 3:
-							login = new RegisterUser();
-							updateLastName(login);
-							System.out.println("Last name changed successfully");
+
+							updateLastName();
+
 							break;
 						default:
 							System.out.println("Invalid option");
 							break;
+
 						}
 					case 3:
 						System.out.println("Update 1. Password 2. First Name 3. Last Name");
 						choice = Integer.parseInt(scanner.nextLine());
 						switch (choice) {
 						case 1:
-							login = new RegisterUser();
-							updatePassword(login);
-							System.out.println("Password changed successfully");
+
+							updatePassword();
+
 							break;
 						case 2:
-							login = new RegisterUser();
-							updateFirstName(login);
-							System.out.println("First name changed successfully");
+
+							updateFirstName();
+
 							break;
 						case 3:
-							login = new RegisterUser();
-							updateLastName(login);
-							System.out.println("Last name changed successfully");
+
+							updateLastName();
+
 							break;
 						default:
 							System.out.println("Invalid option");
 							break;
+
 						}
 					}
 				}
@@ -232,14 +238,14 @@ public class TestApplication {
 						System.out.println("Enter the activity id : ");
 						Integer activivtyId = scanner.nextInt();
 						LearningActivity xx = getActivityById(activivtyId);
-						System.out.println("Activity found.");
+						System.out.println("Activity found." + xx);
 
 						break;
 					case 5:
 						System.out.println("Enter the assessment id : ");
 						Integer assessmentId = scanner.nextInt();
 						Assessment xy = getAssessmentById(assessmentId);
-						System.out.println("Assessment found.");
+						System.out.println("Assessment found." + xy);
 						break;
 					default:
 						System.out.println("Invalid option");
@@ -272,8 +278,21 @@ public class TestApplication {
 
 	}
 
+	private static RegisterUser checkValid(Integer id, String password) throws LoginException {
+		// TODO Auto-generated method stub
+		RegisterUser obj = loginBoundry.getUserById(id);
+		if (obj == null) {
+			return null;
+		} else {
+			if (obj.getPassword().equals(password))
+				return obj;
+		}
+
+		return null;
+	}
+
 	private static RegisterUser getUserById(Integer userId) throws LoginException {
-		
+
 		// TODO Auto-generated method stub
 		return loginBoundry.getUserById(userId);
 
@@ -319,29 +338,51 @@ public class TestApplication {
 		return loginBoundry.deleteUser(id);
 
 	}
-	private static void updateLastName(RegisterUser login) throws LoginException {
-		System.out.println("Your last name is: "+login.getLastName());
-		System.out.println("Enter updated last name: ");
-		login.setLastName(scanner.nextLine());
-		loginBoundry.updateLastName(login);
+
+	private static void updateLastName() throws LoginException {
+		System.out.println("Your ID to update Last name is: ");
+		Integer id = Integer.parseInt(scanner.nextLine());
+		RegisterUser obj = loginBoundry.getUserById(id);
+		if (obj != null) {
+			System.out.println("Your last name is: " + obj.getLastName());
+			System.out.println("Enter last name that to be your updated last name");
+			obj.setFirstName(scanner.nextLine());
+			loginBoundry.updateLastName(obj);
+		} else {
+			System.out.println("Id doesn't exists.");
+		}
 	}
 
-	private static void updateFirstName(RegisterUser login) throws LoginException {
-		System.out.println("Your first name is: "+login.getFirstName());
-		System.out.println("Enter updated first name: ");
-		login.setFirstName(scanner.nextLine());
-		loginBoundry.updateFirstName(login);
+	private static void updateFirstName() throws LoginException {
+		System.out.println("Your ID to update First name is: ");
+		Integer id = Integer.parseInt(scanner.nextLine());
+		RegisterUser obj = loginBoundry.getUserById(id);
+		if (obj != null) {
+			System.out.println("Your first name is: " + obj.getFirstName());
+			System.out.println("Enter name that to be your updated name");
+			obj.setFirstName(scanner.nextLine());
+			loginBoundry.updateFirstName(obj);
+		} else {
+			System.out.println("Id doesn't exists.");
+		}
 
 	}
 
-	private static void updatePassword(RegisterUser login) throws LoginException {
-		//System.out.println("Your password name is: "+login.getLastName());
-		System.out.println("Enter updated password: ");
-		login.setPassword(scanner.nextLine());
-		loginBoundry.updatePassword(login);
+	private static void updatePassword() throws LoginException {
+		System.out.println("Your ID to update password is: ");
+		Integer id = Integer.parseInt(scanner.nextLine());
+		RegisterUser obj = loginBoundry.getUserById(id);
+		if (obj != null) {
+			System.out.println("Your last name is: " + obj.getPassword());
+			System.out.println("Enter password that to be your updated password");
+			obj.setPassword(scanner.nextLine());
+			loginBoundry.updatePassword(obj);
+		} else {
+			System.out.println("Id doesn't exists.");
+		}
 
 	}
-	
+
 	private static void addLearningActivity(LearningActivity learningActivity) throws ActivityException {
 		System.out.println("Enter activity name: ");
 		learningActivity.setActivity_name(scanner.nextLine());
