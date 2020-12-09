@@ -1,5 +1,7 @@
 package com.casestudy.tlta.dao;
 
+import java.util.List;
+
 import javax.persistence.PersistenceException;
 
 import com.casestudy.tlta.entity.RegisterUser;
@@ -7,10 +9,6 @@ import com.casestudy.tlta.entity.RegisterUser;
 public interface RegisterUserDao {
 
 	public void addUser(RegisterUser login) throws PersistenceException;
-
-	//public void addModerator(RegisterUser login) throws PersistenceException;
-
-	//public void addAdmin(RegisterUser login) throws PersistenceException;
 
 	public RegisterUser getUserById(Integer id) throws PersistenceException;
 
@@ -25,5 +23,7 @@ public interface RegisterUserDao {
 	public RegisterUser updateFirstName(RegisterUser login) throws PersistenceException;
 
 	public RegisterUser updateLastName(RegisterUser login) throws PersistenceException;
+
+	public List<RegisterUser> getAllRegisteredUser() throws PersistenceException;
 
 }

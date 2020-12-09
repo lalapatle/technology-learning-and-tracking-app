@@ -3,6 +3,7 @@ package com.casestudy.tlta.pl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import com.casestudy.tlta.boundry.AssessmentActivityBoundry;
@@ -29,7 +30,7 @@ public class TestApplication {
 
 		while (true) {
 			System.out.println(
-					"Enter 1.Login 2.Create(Admin/Moderator/User/Activity/Assessment) 3.Update(Admin/Moderator/User/Activity/Assessment) 4. Delete(Admin/Moderator/User/Activity/Assessment) 5. Search");
+					"Enter 1.Login 2.Create(Admin/Moderator/User/Activity/Assessment) 3.Update(Admin/Moderator/User/Activity/Assessment) 4. Delete(Admin/Moderator/User/Activity/Assessment) 5. Search 6.View All");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
@@ -103,19 +104,13 @@ public class TestApplication {
 						choice = Integer.parseInt(scanner.nextLine());
 						switch (choice) {
 						case 1:
-
 							updatePassword();
-
 							break;
 						case 2:
-
 							updateFirstName();
-
 							break;
 						case 3:
-
 							updateLastName();
-
 							break;
 						default:
 							System.out.println("Invalid option");
@@ -126,19 +121,13 @@ public class TestApplication {
 						choice = Integer.parseInt(scanner.nextLine());
 						switch (choice) {
 						case 1:
-
 							updatePassword();
-
 							break;
 						case 2:
-
 							updateFirstName();
-
 							break;
 						case 3:
-
 							updateLastName();
-
 							break;
 						default:
 							System.out.println("Invalid option");
@@ -150,19 +139,13 @@ public class TestApplication {
 						choice = Integer.parseInt(scanner.nextLine());
 						switch (choice) {
 						case 1:
-
 							updatePassword();
-
 							break;
 						case 2:
-
 							updateFirstName();
-
 							break;
 						case 3:
-
 							updateLastName();
-
 							break;
 						default:
 							System.out.println("Invalid option");
@@ -254,6 +237,27 @@ public class TestApplication {
 				}
 
 					break;
+				case 6:{System.out.println("View All: 1. Registered User 2.Activity 3. Assessment");
+				int choice = Integer.parseInt(scanner.nextLine());
+				switch (choice) {
+				case 1:
+					List<RegisterUser> userList=getAllUser();
+					userList.stream().forEach(System.out::println);
+					break;
+				case 2:
+					List<LearningActivity> activityList=getAllActivity();
+					activityList.stream().forEach(System.out::println);
+					break;
+				case 3:
+					List<Assessment> assessmentList=getAllAssessment();
+					assessmentList.stream().forEach(System.out::println);
+					break;
+					default:
+						System.out.println("Invalid option");
+						break;
+				}
+				}break;
+
 				default:
 					System.out.println("Invalid option");
 					break;
@@ -276,6 +280,21 @@ public class TestApplication {
 
 		}
 
+	}
+
+	private static List<Assessment> getAllAssessment() throws AssesmentException {
+		// TODO Auto-generated method stub
+		return assessmentActivivtyBoundry.getAllAssessmentActivity();
+	}
+
+	private static List<LearningActivity> getAllActivity() throws ActivityException {
+		// TODO Auto-generated method stub
+		return learningActivityBoundry.getAllLearningActivity();
+	}
+
+	private static List<RegisterUser> getAllUser() throws RegisterUserException {
+		// TODO Auto-generated method stub
+		return loginBoundry.getAllRegisteredUser();
 	}
 
 	private static RegisterUser checkValid(Integer id, String password) throws RegisterUserException {

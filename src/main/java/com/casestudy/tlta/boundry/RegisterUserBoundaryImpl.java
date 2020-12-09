@@ -1,5 +1,7 @@
 package com.casestudy.tlta.boundry;
 
+import java.util.List;
+
 import javax.persistence.PersistenceException;
 
 import com.casestudy.tlta.dao.RegisterUserDao;
@@ -8,7 +10,7 @@ import com.casestudy.tlta.entity.RegisterUser;
 import com.casestudy.tlta.exception.RegisterUserException;
 
 
-public class RegisterUserBoundaryImpl implements RegisterUserBoundary{
+public  class RegisterUserBoundaryImpl implements RegisterUserBoundary{
 	private RegisterUserDao loginDao= new RegisterUserDaoImpl();
 
 	@Override
@@ -22,29 +24,6 @@ public class RegisterUserBoundaryImpl implements RegisterUserBoundary{
 		
 	}
 
-//	@Override
-//	public void addModerator(RegisterUser login) throws LoginException {
-//		try {
-//			//validate product
-//			loginDao.addModerator(login);			
-//		}catch(PersistenceException e) {
-//			throw new LoginException(e.getMessage(),e);
-//		}
-//		
-//		
-//	}
-//
-//	@Override
-//	public void addAdmin(RegisterUser login) throws LoginException {
-//		try {
-//			//validate product
-//			loginDao.addAdmin(login);			
-//		}catch(PersistenceException e) {
-//			throw new LoginException(e.getMessage(),e);
-//		}
-//		
-//		
-//	}
 
 	@Override
 	public RegisterUser getUserById(Integer id) throws RegisterUserException {
@@ -113,7 +92,16 @@ public class RegisterUserBoundaryImpl implements RegisterUserBoundary{
 	
 }
 
-
+	public List<RegisterUser> getAllRegisteredUser() throws RegisterUserException{
+		try {			
+			List<RegisterUser> assessmentList= 
+					loginDao.getAllRegisteredUser();
+			return assessmentList;
+		}catch(PersistenceException e) {
+			throw new RegisterUserException(e.getMessage(),e);
+		}
+		
+	}
 
 
 
