@@ -1,7 +1,6 @@
 package com.casestudy.tlta.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,7 +13,7 @@ import com.casestudy.tlta.entity.LearningActivity;
 public class AssessmentActivityDaoImpl implements AssessmentActivityDao{
 	private EntityManagerFactory emf= 
 			Persistence.createEntityManagerFactory("technology-learning-and-tracking-app");
-
+	
 	@Override
 	public Integer addAssessmentActivity(Assessment assessmentActivity) throws PersistenceException {
 		EntityManager entityManager=emf.createEntityManager();

@@ -17,11 +17,11 @@ public class UserActivity {
 	@Id
 	@Column(name = "user_activity_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private LearningActivity userActivityId;
+	private Integer userActivityId;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
-	private Login login;
+	private RegisterUser login;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "activity_id")
@@ -33,19 +33,19 @@ public class UserActivity {
 	@Column(name = "certificate")
 	private String certificate;
 
-	public LearningActivity getUserActivityId() {
+	public Integer getUserActivityId() {
 		return userActivityId;
 	}
 
-	public void setUserActivityId(LearningActivity userActivityId) {
+	public void setUserActivityId(Integer userActivityId) {
 		this.userActivityId = userActivityId;
 	}
 
-	public Login getLogin() {
+	public RegisterUser getLogin() {
 		return login;
 	}
 
-	public void setLogin(Login login) {
+	public void setLogin(RegisterUser login) {
 		this.login = login;
 	}
 
