@@ -36,13 +36,13 @@ public class TestApplication {
 	public static void main(String[] args) throws NumberFormatException, RegisterUserException {
 
 		while (true) {
-			System.out.println("Enter 1.Login"
-					+ "\n2.Create(Admin/Moderator/User/Ac7tivity/Assessment)"
-					+ "\n3.Update(Admin/Moderator/User/Activity/Assessment) "
-					+ "\n4. Delete(Admin/Moderator/User/Activity/Assessment)" 
-					+ "\n 5. Search "
-					+ "\n6.View All "
-					+ "\n7.User can register to activity ");
+			System.out.println("Enter 1. Login"
+					+ "\n2. Create"
+					+ "\n3. Update "
+					+ "\n4. Delete" 
+					+ "\n5. Search "
+					+ "\n6. View All "
+					+ "\n7. User can register to activity ");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
