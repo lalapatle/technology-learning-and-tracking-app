@@ -84,7 +84,7 @@ class AssessmentActivityBoundryImplTest {
 	}
 
 	@Test
-	void testUpdateAssessmentActivity() throws AssesmentException {
+	void testUpdateAssessmentActivity() throws  AssesmentException {
 		Assessment assess = new Assessment();
 		if(assessmentImpl != null) {
 			if(assess.getId()!= null) {
