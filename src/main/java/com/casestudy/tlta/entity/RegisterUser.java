@@ -34,7 +34,7 @@ public class RegisterUser {
 	private String password;
 	
 	@Column(name = "role")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	
 	@OneToMany(mappedBy = "login")
