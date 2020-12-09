@@ -1,13 +1,17 @@
+
 package com.casestudy.tlta.entity;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,46 +19,55 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
 @Table(name="learning_activity")
-public class LearningActivity {
+public class LearningActivity implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;
+	
 	@Column(name = "activity_name")
 	private String activity_name;
+	
 	@Column(name="activity_link")
 	private String activity_link;
+	
 	@Column(name="activity_level")
 	private String activity_level;
+	
 	@Column(name="activity_time")
 	private Double activity_time;
-	@Column(name="activity_realsedate")
-	private LocalDate activity_realsedate;
 	
-	@OneToMany(mappedBy = "learningActivity")
-	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
+	@Temporal(TemporalType.DATE)
+	@Column(name="activity_release_date")
+	private Date activity_realsedate;
 	
-	public Set<UserActivity> getUserActivity(){
-		return userActivity;
-	}
-	
-	public void setUserActivity(Set<UserActivity> groups) {
-		this.userActivity = groups;
-	}
-	
-	public void addUserActivity(UserActivity userActivity) {
-		this.userActivity.add(userActivity);
-	}
-	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="assesment_id")
 	private Assessment assesment;
 	
-	
+//	@OneToMany(mappedBy = "learningActivity")
+//	private Set<UserActivity> userActivity = new HashSet<UserActivity>();
+//	
+//	public Set<UserActivity> getUserActivity(){
+//		return userActivity;
+//	}
+//	
+//	public void setUserActivity(Set<UserActivity> groups) {
+//		this.userActivity = groups;
+//	}
+//	
+//	public void addUserActivity(UserActivity userActivity) {
+//		this.userActivity.add(userActivity);
+//	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -85,10 +98,10 @@ public class LearningActivity {
 	public void setActivity_time(Double activity_time) {
 		this.activity_time = activity_time;
 	}
-	public LocalDate getActivity_realsedate() {
+	public Date getActivity_realsedate() {
 		return activity_realsedate;
 	}
-	public void setActivity_realsedate(LocalDate activity_realsedate) {
+	public void setActivity_realsedate(Date activity_realsedate) {
 		this.activity_realsedate = activity_realsedate;
 	}
 	public Assessment getAssesment() {
@@ -105,7 +118,7 @@ public class LearningActivity {
 	
 	//All arguments constructor
 	public LearningActivity(Integer id, String activity_name, String activity_link, String activity_level, Double activity_time,
-			LocalDate activity_realsedate, Assessment assesment) {
+			Date activity_realsedate, Assessment assesment) {
 		super();
 		this.id = id;
 		this.activity_name = activity_name;
@@ -123,10 +136,4 @@ public class LearningActivity {
 				+ ", activity_level=" + activity_level + ", activity_time=" + activity_time + ", activity_realsedate="
 				+ activity_realsedate + ", assesment=" + assesment + "]";
 	}
-
-
-	
-
-
-
 }

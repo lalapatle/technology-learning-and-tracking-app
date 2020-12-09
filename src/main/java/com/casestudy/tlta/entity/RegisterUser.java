@@ -1,3 +1,4 @@
+
 package com.casestudy.tlta.entity;
 import java.util.HashSet;
 import java.util.Set;

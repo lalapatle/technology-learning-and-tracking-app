@@ -8,11 +8,12 @@ import com.casestudy.tlta.dao.LearningActivityDao;
 import com.casestudy.tlta.dao.LearningActivityDaoImpl;
 import com.casestudy.tlta.entity.LearningActivity;
 import com.casestudy.tlta.exception.ActivityException;
+import com.casestudy.tlta.exception.AssesmentException;
 
 public class LearningActivityBoundryImpl implements LearningActivityBoundry{
 	private LearningActivityDao learningActivityDao=new LearningActivityDaoImpl();
 	@Override
-	public Integer addLearningActivity(LearningActivity learningActivity) throws ActivityException {
+	public Integer addLearningActivity(LearningActivity learningActivity) throws ActivityException, AssesmentException {
 		try {
 			return learningActivityDao.addLearningActivity(learningActivity);
 		}catch(PersistenceException e) {

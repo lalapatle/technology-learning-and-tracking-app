@@ -1,9 +1,8 @@
+
 package com.casestudy.tlta.entity;
-
-
-
-
 import java.util.Date;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -11,13 +10,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="assesment_activity")
-public class Assessment {
+public class Assessment implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -36,6 +38,16 @@ public class Assessment {
 	@Column(name="assesment_time_duration")
 	private Double assesment_time_duration;
 	
+	@OneToOne(mappedBy = "assesment")
+    private LearningActivity learningActivity;
+   
+	
+	public LearningActivity getLearningActivity() {
+		return learningActivity;
+	}
+	public void setLearningActivity(LearningActivity learningActivity) {
+		this.learningActivity = learningActivity;
+	}
 	// Getter and Setter methods
 	public Integer getId() {
 		return id;
