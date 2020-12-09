@@ -38,7 +38,7 @@ public class TestApplication {
 		while (true) {
 			System.out.println(
 					"Enter 1.Login 2.Create(Admin/Moderator/User/Activity/Assessment/) \n3.Update(Admin/Moderator/User/Assessment/activity) \n4. Delete(Admin/Moderator/User/Assessment/activity) \n5. Search \n6. View all"
-							+ "\n 7.User can register to activity ");
+							+ "\n 7.User can register to activity \n 8.User can upload certificate");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
@@ -53,8 +53,7 @@ public class TestApplication {
 
 //                    break;
 				case 2: {
-					// TODO role is not inserting correctly - by lala
-					// refer reddy sir code
+					
 					System.out.println("Create 1. Admin 2. User 3.Moderator 4. Activity 5. Assessment");
 					int choice = Integer.parseInt(scanner.nextLine());
 					switch (choice) {
@@ -102,9 +101,7 @@ public class TestApplication {
 				}
 					break;
 				case 3: {
-					// TODO update for admin not working correctly - by lala
-					// same for user and moderator hint: first accept id for updating -by lala
-					// refer update assessment code
+					
 					System.out.println(
 							"Update details of :  1. Admin 2. Moderator 3. User 4. Update assessment 5.Update Activity");
 					int choice = Integer.parseInt(scanner.nextLine());
@@ -210,7 +207,7 @@ public class TestApplication {
 					break;
 				case 4: {
 					System.out.println(
-							"Enter 1. Delete Admin \n 2. Delete Moderator \n 3 Delete User \n4.Learning Activity \n5.Delete assessment");
+							"Enter 1. Delete Admin \n 2. Delete Moderator \n 3 Delete User \n4.Delete Learning Activity \n5.Delete assessment");
 
 					int choice = Integer.parseInt(scanner.nextLine());
 					Integer id = 0;
@@ -231,8 +228,7 @@ public class TestApplication {
 						System.out.println("User deleted successfully.");
 						break;
 					case 4:
-
-						System.out.println("Enter id to be deleted");
+						System.out.println("Enter learning activity id to be deleted");
 						id = deleteActivivty(Integer.parseInt(scanner.nextLine()));
 						System.out.println("Activity deleted successfully.");
 						break;
@@ -277,11 +273,10 @@ public class TestApplication {
 					case 4:
 						System.out.println("Enter the activity id : ");
 						Integer activivtyId = scanner.nextInt();
-						LearningActivity xx = getActivityById(activivtyId);
+						LearningActivity getlearningActivity = getActivityById(activivtyId);
+						System.out.println(getlearningActivity);
 						System.out.println("Activity found.");
-
 						break;
-
 					case 5:
 						System.out.println("Enter assessment id for searching:");
 						Integer id = Integer.parseInt(scanner.nextLine());
@@ -297,6 +292,7 @@ public class TestApplication {
 						break;
 					}
 				}
+					break;
 				case 6:
 					System.out.println("Enter 1 View all Users 2. View all activities 3. View all assessments");
 					Integer choice = Integer.parseInt(scanner.nextLine());
@@ -304,6 +300,8 @@ public class TestApplication {
 					case 1:
 						break;
 					case 2:
+						List<LearningActivity> Llist = getAllLearningActivity();
+						Llist.stream().forEach(System.out::println);
 						break;
 					case 3:
 						List<Assessment> list = getAllAssessmentActivity();
@@ -311,23 +309,37 @@ public class TestApplication {
 						break;
 					default:
 						System.out.println("Invalid option");
+						break;
 					}
+					break;
 				case 7:
+//					System.out.println("Enter user Id:");
+//					Integer userId = Integer.parseInt(scanner.nextLine());
+//					System.out.println("Enter activity id: ");
+//					Integer activityId = Integer.parseInt(scanner.nextLine());
+//					UserActivity userActivity = new UserActivity();
+//					Integer userActivityId = userRegisterToActivity(userActivity, userId, activityId);
+//					System.out.println("User with id " + userId + " register activity with id: " + userActivityId);
+					break;
+				case 8:
 					System.out.println("Enter user Id:");
-					Integer userId = Integer.parseInt(scanner.nextLine());
-					System.out.println("Enter activity id: ");
-					Integer activityId = Integer.parseInt(scanner.nextLine());
-					UserActivity userActivity = new UserActivity();
-					Integer userActivityId = userRegisterToActivity(userActivity, userId, activityId);
-					System.out.println("User with id " + userId + " register activity with id: " + userActivityId);
+					Integer userId1 = Integer.parseInt(scanner.nextLine());
+					System.out.println("Enter activity Id:");
+					Integer activityId2 = Integer.parseInt(scanner.nextLine());
+					System.out.println("Enter file path");
+					String path = scanner.nextLine();
+					Integer status = uploadCertificate(path,userId1,activityId2);
+					System.out.println(status);
+					System.out.println("Cerificate uploaded successfully");
 					break;
 				default:
 					System.out.println("Invalid option");
 					break;
-
+					
 				}
+			}
 
-			} catch (AssesmentException e) {
+			catch (AssesmentException e) {
 				e.printStackTrace();
 			} catch (ActivityException e1) {
 				e1.printStackTrace();
@@ -345,6 +357,16 @@ public class TestApplication {
 
 		}
 
+	}
+
+	private static Integer uploadCertificate(String path, Integer userId1, Integer activityId2) throws ActivityException {
+		
+		return userActivityBoundry.uploadCerificate(path, userId1, activityId2);
+	}
+
+	private static List<LearningActivity> getAllLearningActivity() throws ActivityException {
+
+		return leaarningActivityBoundry.getAllLearningActivity();
 	}
 
 	private static LearningActivity getLearningActivityById(Integer activityId) throws ActivityException {
@@ -431,19 +453,20 @@ public class TestApplication {
 		System.out.println(
 				"Enter 1. Update assessment name \n 2. Update assessment type\n 3. Update assessment release date\n 4. update assessment time duration");
 		Integer choice2 = Integer.parseInt(scanner.nextLine());
+		Assessment updateAssessment = new Assessment();
 		switch (choice2) {
 		case 1:
 			System.out.println("Existing name of assessment is: " + assessment.getAssesment_name());
 			System.out.println("Enter new name: ");
 			assessment.setAssesment_name(scanner.nextLine());
-			Assessment updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
-			return updateAssessment;
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
 		case 2:
 			System.out.println("Existing type of assessment is: " + assessment.getAssesment_type());
 			System.out.println("Enter new type: ");
 			assessment.setAssesment_type(scanner.nextLine());
-			Assessment updateAssessment1 = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
-			return updateAssessment1;
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
 
 		case 3:
 			System.out.println("Existing release date of assessment is: " + assessment.getAssesment_release_date());
@@ -451,26 +474,71 @@ public class TestApplication {
 			String strDate = scanner.nextLine();
 			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
 			assessment.setAssesment_release_date(date1);
-			Assessment updateAssessment2 = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
-			return updateAssessment2;
-
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
 		case 4:
 			System.out.println(
 					"Existing time duration of assessment is: " + assessment.getAssesment_time_duration() + " hours");
 			System.out.println("Enter new type: ");
 			assessment.setAssesment_time_duration(Double.parseDouble(scanner.nextLine()));
-			Assessment updateAssessment3 = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
-			return updateAssessment3;
-
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
 		default:
-			return null;
+			plLogger.error("Invalid option");
+			break;
 		}
+		return updateAssessment;
 
 	}
 
-	private static LearningActivity updateLearningActivity(LearningActivity learningActivity) {
-		//System.out.println("Enter 1. update ");
-		return null;
+	private static LearningActivity updateLearningActivity(LearningActivity learningActivity)
+			throws ActivityException, ParseException {
+		System.out.println(
+				"Enter \n1. update activity name \n2.update activity link \n3.update activity level \n4.update time duration \n5.update release date");
+		Integer choice = Integer.parseInt(scanner.nextLine());
+		LearningActivity updatedActivity = new LearningActivity();
+		switch (choice) {
+		case 1:
+			System.out.println("Existing activity name is: " + learningActivity.getActivity_name());
+			System.out.println("Enter new activity name ::");
+			String name = scanner.nextLine();
+			learningActivity.setActivity_name(name);
+			updatedActivity = leaarningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 2:
+			System.out.println("Existing activity link is: " + learningActivity.getActivity_link());
+			System.out.println("Enter new activity link ::");
+			String link = scanner.nextLine();
+			learningActivity.setActivity_link(link);
+			updatedActivity = leaarningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 3:
+			System.out.println("Existing activity level is: " + learningActivity.getActivity_level());
+			System.out.println("Enter new activity level ::");
+			String level = scanner.nextLine();
+			learningActivity.setActivity_level(level);
+			updatedActivity = leaarningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 4:
+			System.out.println("Existing time duration is: " + learningActivity.getActivity_time() + " hours.");
+			System.out.println("Enter new duration in hours ::");
+			Double timeDuration = Double.parseDouble(scanner.nextLine());
+			learningActivity.setActivity_time(timeDuration);
+			updatedActivity = leaarningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 5:
+			System.out.println(
+					"Existing release date of learning activity is: " + learningActivity.getActivity_realsedate());
+			System.out.println("Enter new assessment release date(yyyy-mm-dd)::");
+			String strDate = scanner.nextLine();
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+			learningActivity.setActivity_realsedate(date1);
+			updatedActivity = leaarningActivityBoundry.updateLearningActivity(learningActivity);
+		default:
+			plLogger.error("Invalid option");
+			break;
+		}
+		return updatedActivity;
 	}
 
 	private static Assessment getAssessmentById(Integer assessmentId) throws AssesmentException {

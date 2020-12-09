@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 import com.casestudy.tlta.entity.LearningActivity;
 import com.casestudy.tlta.entity.RegisterUser;
@@ -16,16 +17,26 @@ public class UserActivityDaoImpl implements UserActivityDao{
 	private LoginDao loginDao = new LoginDaoImpl();
 	private LearningActivityDao learningActivityDao = new LearningActivityDaoImpl();
 	@Override
-	public UserActivity uploadCerificate(UserActivity userActivity, String filePath) throws PersistenceException {
+	public Integer uploadCerificate(String filePath,Integer userId,Integer activityId) throws PersistenceException {
 		EntityManager em = emf.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			userActivity.setStatus("complete");
-			userActivity.setCertificate(filePath);
-			UserActivity updatedUserActivity = em.merge(userActivity);
-			em.flush();
-			em.getTransaction().commit();
-			return updatedUserActivity;
+//			userActivity.setStatus("complete");
+//			userActivity.setCertificate(filePath);
+//			UserActivity updatedUserActivity = em.merge(userActivity);
+//			em.flush();
+//			
+//			
+//			Query query = em.createQuery("UPDATE UserActivity e SET e.certificate = :filePath,e.status = :complete"
+//		              + " WHERE e.userId = :uid AND e.activityId = :aid");
+//		      query.setParameter("filePath", filePath);
+//		      query.setParameter("complete", "complete");
+//		      query.setParameter("uid", userId);
+//		      query.setParameter("aid", activityId);
+//		      int rowsUpdated = query.executeUpdate();
+//		      System.out.println("user_activity entitiy Updated: " + rowsUpdated);
+//		      em.getTransaction().commit();
+//			return rowsUpdated;
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			throw e;
@@ -35,7 +46,7 @@ public class UserActivityDaoImpl implements UserActivityDao{
 			em.close();
 			
 		}
-
+		return 1;
 	}
 
 	@Override

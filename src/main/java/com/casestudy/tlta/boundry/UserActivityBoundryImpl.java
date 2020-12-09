@@ -10,17 +10,7 @@ import com.casestudy.tlta.exception.ActivityException;
 
 public class UserActivityBoundryImpl implements UserActivityBoundry{
 	private UserActivityDao userActivityDao= new UserActivityDaoImpl();
-	@Override
-	public UserActivity uploadCerificate(UserActivity userActivity, String filePath) throws ActivityException {
-		try {			
-			UserActivity updatedUserActivity= 
-					userActivityDao.uploadCerificate(userActivity,filePath);
-			
-			return updatedUserActivity;
-		}catch(PersistenceException e) {
-			throw new ActivityException(e.getMessage(),e);
-		}
-	}
+	
 	@Override
 	public UserActivity updateStatus(UserActivity userActivity, String status) throws ActivityException {
 		try {			
@@ -43,4 +33,15 @@ public class UserActivityBoundryImpl implements UserActivityBoundry{
 		}
 		
 	}
+	@Override
+	public Integer uploadCerificate(String filePath, Integer userId, Integer activityId) throws ActivityException {
+		try {
+			Integer updateId = userActivityDao.uploadCerificate(filePath, userId, activityId);
+			return updateId;
+		}catch(PersistenceException p) {
+			throw new ActivityException(p.getMessage(),p);
+		}
+		
+	}
+	
 }
