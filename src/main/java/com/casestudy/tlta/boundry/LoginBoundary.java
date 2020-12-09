@@ -11,7 +11,7 @@ public interface LoginBoundary {
 	public void addAdmin(RegisterUser login) throws LoginException;
 	public RegisterUser getUserById(Integer id) throws LoginException;
 	public RegisterUser getModeratorById(Integer id) throws LoginException;
-	public long deleteUser(Integer id) throws LoginException;
+	public Integer deleteUser(Integer id) throws LoginException;
 	public RegisterUser updatePassword(RegisterUser login) throws LoginException;
 	public RegisterUser updateFirstName(RegisterUser firstName) throws LoginException;
 	public RegisterUser updateLastName(RegisterUser lastName) throws LoginException;

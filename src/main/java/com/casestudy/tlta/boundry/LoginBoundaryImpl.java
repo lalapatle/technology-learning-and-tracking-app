@@ -67,10 +67,10 @@ public class LoginBoundaryImpl implements LoginBoundary{
 	}
 
 	@Override
-	public long deleteUser(Integer id) throws LoginException {
+	public Integer deleteUser(Integer id) throws LoginException {
 		try {			
-			long Id= loginDao.deleteUser(id);
-			return Id;
+			return loginDao.deleteUser(id);
+			
 		}catch(PersistenceException e) {
 			throw new LoginException(e.getMessage(),e);
 		}

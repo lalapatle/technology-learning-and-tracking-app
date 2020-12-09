@@ -6,15 +6,18 @@ import javax.persistence.PersistenceException;
 
 import com.casestudy.tlta.dao.LearningActivityDao;
 import com.casestudy.tlta.dao.LearningActivityDaoImpl;
+import com.casestudy.tlta.entity.Assessment;
 import com.casestudy.tlta.entity.LearningActivity;
 import com.casestudy.tlta.exception.ActivityException;
+import com.casestudy.tlta.exception.AssesmentException;
 
 public class LearningActivityBoundryImpl implements LearningActivityBoundry{
 	private LearningActivityDao learningActivityDao=new LearningActivityDaoImpl();
 	@Override
-	public Integer addLearningActivity(LearningActivity learningActivity) throws ActivityException {
+	public Integer addLearningActivity(LearningActivity learningActivity) throws AssesmentException, ActivityException {
 		try {
-			return learningActivityDao.addLearningActivity(learningActivity);
+			int id = learningActivityDao.addLearningActivity(learningActivity);
+			return id;
 		}catch(PersistenceException e) {
 			throw new ActivityException(e.getMessage(),e);
 		}

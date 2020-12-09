@@ -16,7 +16,7 @@ public interface LoginDao {
 
 	public RegisterUser getModeratorById(Integer id) throws PersistenceException;
 
-	public long deleteUser(Integer id) throws PersistenceException;
+	public Integer deleteUser(Integer id) throws PersistenceException;
 
 	public RegisterUser updatePassword(RegisterUser login) throws PersistenceException;
 

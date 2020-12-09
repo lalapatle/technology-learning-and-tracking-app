@@ -1,13 +1,9 @@
 package com.casestudy.tlta.entity;
 
 public enum Role {
-	USER("User"),
-
-	
-
-	MODERATOR("Moderator") ,
-
-	ADMIN("Admin");
+	USER("user"),
+	MODERATOR("moderator") ,
+	ADMIN("admin");
 	
 private String role;
 	
@@ -18,6 +14,4 @@ private String role;
 	public String getRole() {
 		return role;
 	}
-	
-
 }

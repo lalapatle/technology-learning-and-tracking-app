@@ -14,15 +14,14 @@ public class AssessmentActivityBoundryImpl implements AssessmentActivityBoundry{
 	private AssessmentActivityDao assessmentActivityDao= new AssessmentActivityDaoImpl();
 
 	@Override
-	public   Integer addAssessmentActivity(Assessment assessmentActivity) throws AssesmentException {
+	public Integer addAssessmentActivity(Assessment assessmentActivity) throws AssesmentException {
 		// TODO Auto-generated method stub
 		try {
-			
-			assessmentActivityDao.addAssessmentActivity(assessmentActivity);			
+			assessmentActivityDao.addAssessmentActivity(assessmentActivity);
+			return assessmentActivity.getId();
 		}catch(PersistenceException e) {
 			throw new AssesmentException(e.getMessage(),e);
 		}
-		return 1;
 
 	}
 	

@@ -13,5 +13,6 @@ public interface AssessmentActivityDao {
 	public Integer deleteAssessmentActivity(Integer id) throws PersistenceException; 
 	public List<Assessment> getAllAssessmentActivity() throws PersistenceException; 
 	public Assessment updateAssessmentActivity(Assessment assessmentActivity) throws PersistenceException;
+	
 }
 

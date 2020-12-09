@@ -104,7 +104,7 @@ public class LoginDaoImpl implements LoginDao{
 		}	
 	}
 	@Override
-	public long deleteUser(Integer id) throws PersistenceException {
+	public Integer deleteUser(Integer id) throws PersistenceException {
 		// TODO Auto-generated method stub
 		EntityManager entityManager=emf.createEntityManager();
 		try {
