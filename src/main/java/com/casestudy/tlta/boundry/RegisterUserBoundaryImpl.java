@@ -2,14 +2,14 @@ package com.casestudy.tlta.boundry;
 
 import javax.persistence.PersistenceException;
 
-import com.casestudy.tlta.dao.LoginDao;
-import com.casestudy.tlta.dao.LoginDaoImpl;
+import com.casestudy.tlta.dao.RegisterUserDao;
+import com.casestudy.tlta.dao.RegisterUserDaoImpl;
 import com.casestudy.tlta.entity.RegisterUser;
 import com.casestudy.tlta.exception.LoginException;
 
 
 public class RegisterUserBoundaryImpl implements RegisterUserBoundary{
-	private LoginDao loginDao= new LoginDaoImpl();
+	private RegisterUserDao loginDao= new RegisterUserDaoImpl();
 
 	@Override
 	public void addUser(RegisterUser login) throws LoginException {
@@ -22,29 +22,29 @@ public class RegisterUserBoundaryImpl implements RegisterUserBoundary{
 		
 	}
 
-	@Override
-	public void addModerator(RegisterUser login) throws LoginException {
-		try {
-			//validate product
-			loginDao.addModerator(login);			
-		}catch(PersistenceException e) {
-			throw new LoginException(e.getMessage(),e);
-		}
-		
-		
-	}
-
-	@Override
-	public void addAdmin(RegisterUser login) throws LoginException {
-		try {
-			//validate product
-			loginDao.addAdmin(login);			
-		}catch(PersistenceException e) {
-			throw new LoginException(e.getMessage(),e);
-		}
-		
-		
-	}
+//	@Override
+//	public void addModerator(RegisterUser login) throws LoginException {
+//		try {
+//			//validate product
+//			loginDao.addModerator(login);			
+//		}catch(PersistenceException e) {
+//			throw new LoginException(e.getMessage(),e);
+//		}
+//		
+//		
+//	}
+//
+//	@Override
+//	public void addAdmin(RegisterUser login) throws LoginException {
+//		try {
+//			//validate product
+//			loginDao.addAdmin(login);			
+//		}catch(PersistenceException e) {
+//			throw new LoginException(e.getMessage(),e);
+//		}
+//		
+//		
+//	}
 
 	@Override
 	public RegisterUser getUserById(Integer id) throws LoginException {
@@ -67,9 +67,9 @@ public class RegisterUserBoundaryImpl implements RegisterUserBoundary{
 	}
 
 	@Override
-	public long deleteUser(Integer id) throws LoginException {
+	public Integer deleteUser(Integer id) throws LoginException {
 		try {			
-			long Id= loginDao.deleteUser(id);
+			Integer Id= loginDao.deleteUser(id);
 			return Id;
 		}catch(PersistenceException e) {
 			throw new LoginException(e.getMessage(),e);

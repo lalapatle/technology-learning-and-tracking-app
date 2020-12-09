@@ -81,7 +81,7 @@ public class RegisterUser {
 		this.role = role;
 	}
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
