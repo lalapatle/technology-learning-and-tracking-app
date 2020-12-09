@@ -87,7 +87,7 @@ class AssessmentActivityBoundryImplTest {
 	void testUpdateAssessmentActivity() throws AssesmentException {
 		Assessment assess = new Assessment();
 		if(assessmentImpl != null) {
-			if(assess.getId() != null) {
+			if(assess.getId()!= null) {
 				assess.setAssesment_name("Coding");
 			}
 
