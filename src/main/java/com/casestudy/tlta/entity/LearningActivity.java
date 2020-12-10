@@ -133,6 +133,6 @@ public class LearningActivity implements Serializable{
 	public String toString() {
 		return "Activity [id=" + id + ", activity_name=" + activity_name + ", activity_link=" + activity_link
 				+ ", activity_level=" + activity_level + ", activity_time=" + activity_time + ", activity_realsedate="
-				+ activity_realsedate + ", assesment=" + assesment + "]";
+				+ activity_realsedate + "]";
 	}
 }

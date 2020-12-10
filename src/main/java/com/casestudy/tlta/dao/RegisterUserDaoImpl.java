@@ -180,7 +180,7 @@ public class RegisterUserDaoImpl implements RegisterUserDao{
 		// TODO Auto-generated method stub
 		EntityManager entityManager=emf.createEntityManager();
 
-		String jql= "From LearningActivity a";
+		String jql= "From RegisterUser a";
 		try {			
 			entityManager.getTransaction().begin();
 			TypedQuery<RegisterUser> query=

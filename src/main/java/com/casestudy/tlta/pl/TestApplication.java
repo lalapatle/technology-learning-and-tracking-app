@@ -460,14 +460,6 @@ private static Integer uploadCertificate(String path, Integer userId1, Integer a
 		String strDate = scanner.nextLine();
 		Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
 		learningActivity.setActivity_realsedate(date1);
-
-//		System.out.println("Enter assessment Id : ");
-//		int assessmentId = Integer.parseInt(scanner.nextLine());
-//		Assessment assessment = assessmentActivivtyBoundry.searchAssessmentActivityById(assessmentId);
-//		
-		// System.out.println(assessment);
-		// learningActivity.setAssesment(assessment);
-
 		int id = learningActivityBoundry.addLearningActivity(learningActivity);
 		return id;
 
