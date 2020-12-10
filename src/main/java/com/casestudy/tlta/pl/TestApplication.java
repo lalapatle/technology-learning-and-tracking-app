@@ -37,7 +37,7 @@ public class TestApplication {
 
 		while (true) {
 			System.out.println("Enter 1. Login" + "\n2. Create" + "\n3. Update" + "\n4. Delete" + "\n5. Search "
-					+ "\n6. View All " + "\n7. User can register to activity " + "\n8. User can upload certificate ");
+					+ "\n6. View All " + "\n7. User can register to activity " );
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
@@ -301,17 +301,7 @@ public class TestApplication {
 					Integer userActivityId = userRegisterToActivity(userActivity, userId, activityId);
 					System.out.println("User with id " + userId + " register activity with id: " + userActivityId);
 					break;
-				case 8:
-					System.out.println("Enter user Id:");
-					Integer userId1 = Integer.parseInt(scanner.nextLine());
-					System.out.println("Enter activity Id:");
-					Integer activityId2 = Integer.parseInt(scanner.nextLine());
-					System.out.println("Enter file path");
-					String path = scanner.nextLine();
-					Integer status = uploadCertificate(path, userId1, activityId2);
-					System.out.println(status);
-					System.out.println("Cerificate uploaded successfully");
-					break;
+
 				default:
 					plLogger.error("Invalid option");
 					break;
@@ -436,12 +426,7 @@ public class TestApplication {
 		return userActivityBoundry.userRegisterToLearningActivity(userActivity, userId, activityId);
 	}
 
-	private static Integer uploadCertificate(String path, Integer userId1, Integer activityId2)
-			throws ActivityException {
-
-		return userActivityBoundry.uploadCerificate(path, userId1, activityId2);
-	}
-
+	
 	private static List<Assessment> getAllAssessment() throws AssesmentException {
 		// TODO Auto-generated method stub
 		return assessmentActivivtyBoundry.getAllAssessmentActivity();
