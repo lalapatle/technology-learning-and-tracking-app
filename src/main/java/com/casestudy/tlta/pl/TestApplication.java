@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
+import java.lang.*;
 import org.jboss.logging.Logger;
 
 import com.casestudy.tlta.boundry.AssessmentActivityBoundry;
@@ -43,7 +43,7 @@ public class TestApplication {
 					+ "\n5. Search "
 					+ "\n6. View All "
 					+ "\n7. User can register to activity "
-					+ "\n8. 8.User can upload certificate ");
+					+ "\n8. User can upload certificate ");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
@@ -72,21 +72,21 @@ public class TestApplication {
 						login = new RegisterUser();
 						login.setRole(Role.ADMIN);
 						addPerson(login);
-						plLogger.info("New ADMIN added successfully");
+						plLogger.info("New ADMIN added successfully with id " +login.getId());
 
 						break;
 					case 2:
 						login = new RegisterUser();
 						login.setRole(Role.USER);
 						addPerson(login);
-						plLogger.info("New USER added successfully");
+						plLogger.info("New USER added successfully with id " +login.getId());
 
 						break;
 					case 3:
 						login = new RegisterUser();
 						login.setRole(Role.USER);
 						addPerson(login);
-						plLogger.info("New MODERATOR added successfully");
+						plLogger.info("New MODERATOR added successfully with id " +login.getId());
 
 						break;
 					case 4:
@@ -215,34 +215,34 @@ public class TestApplication {
 					switch (choice) {
 					case 1:
 						System.out.println("Enter the admin id : ");
-						Integer adminId = scanner.nextInt();
+						Integer adminId = (Integer.parseInt(scanner.nextLine()));
 						login = getUserById(adminId);
 						plLogger.info("Admin found." + login);
 						break;
 					case 2:
 						System.out.println("Enter the moderator id : ");
-						Integer ModeratorId = scanner.nextInt();
+						Integer ModeratorId = (Integer.parseInt(scanner.nextLine()));
 						login = getUserById(ModeratorId);
 
 						plLogger.info("Moderator found." + login);
 						break;
 					case 3:
 						System.out.println("Enter the user id : ");
-						Integer userId = scanner.nextInt();
+						Integer userId = (Integer.parseInt(scanner.nextLine()));
 						login = getUserById(userId);
 
 						plLogger.info("User found." + login);
 						break;
 					case 4:
 						System.out.println("Enter the activity id : ");
-						Integer activivtyId = scanner.nextInt();
+						Integer activivtyId = (Integer.parseInt(scanner.nextLine()));
 						LearningActivity xx = getActivityById(activivtyId);
 						plLogger.info("Activity found." + xx);
 
 						break;
 					case 5:
 						System.out.println("Enter the assessment id : ");
-						Integer assessmentId = scanner.nextInt();
+						Integer assessmentId = (Integer.parseInt(scanner.nextLine()));
 						Assessment xy = getAssessmentById(assessmentId);
 						plLogger.info("Assessment found." + xy);
 						break;

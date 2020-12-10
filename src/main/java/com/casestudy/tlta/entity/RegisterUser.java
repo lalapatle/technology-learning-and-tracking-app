@@ -109,6 +109,7 @@ public class RegisterUser {
 
 	@Override
 	public String toString() {
+
 		return "RegisterUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
 				+ ", password=" + password + ", role=" + role +"]";
 	}

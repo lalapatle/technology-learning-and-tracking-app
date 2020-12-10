@@ -77,9 +77,9 @@ public class RegisterUserDaoImpl implements RegisterUserDao{
 			entityManager.getTransaction().begin();
 			RegisterUser login= 
 					entityManager.find(RegisterUser.class, id);
-			entityManager.remove(id);
+			entityManager.remove(login);
 			entityManager.getTransaction().commit();	
-			return login.getId();
+			return id;
 		}catch(PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			throw e;
