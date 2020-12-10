@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.lang.*;
+
 import org.jboss.logging.Logger;
 
 import com.casestudy.tlta.boundry.AssessmentActivityBoundry;
@@ -31,19 +31,13 @@ public class TestApplication {
 	private static LearningActivityBoundry learningActivityBoundry = new LearningActivityBoundryImpl();
 	private static AssessmentActivityBoundry assessmentActivivtyBoundry = new AssessmentActivityBoundryImpl();
 	private static Logger plLogger = Logger.getLogger(TestApplication.class);
-	private static UserActivityBoundry userActivityBoundry=new UserActivityBoundryImpl();
+	private static UserActivityBoundry userActivityBoundry = new UserActivityBoundryImpl();
 
 	public static void main(String[] args) throws NumberFormatException, RegisterUserException {
 
 		while (true) {
-			System.out.println("Enter 1. Login"
-					+ "\n2. Create"
-					+ "\n3. Update "
-					+ "\n4. Delete" 
-					+ "\n5. Search "
-					+ "\n6. View All "
-					+ "\n7. User can register to activity "
-					+ "\n8. User can upload certificate ");
+			System.out.println("Enter 1. Login" + "\n2. Create" + "\n3. Update" + "\n4. Delete" + "\n5. Search "
+					+ "\n6. View All " + "\n7. User can register to activity " + "\n8. User can upload certificate ");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
@@ -72,21 +66,21 @@ public class TestApplication {
 						login = new RegisterUser();
 						login.setRole(Role.ADMIN);
 						addPerson(login);
-						plLogger.info("New ADMIN added successfully with id " +login.getId());
+						plLogger.info("New ADMIN added successfully with id " + login.getId());
 
 						break;
 					case 2:
 						login = new RegisterUser();
 						login.setRole(Role.USER);
 						addPerson(login);
-						plLogger.info("New USER added successfully with id " +login.getId());
+						plLogger.info("New USER added successfully with id " + login.getId());
 
 						break;
 					case 3:
 						login = new RegisterUser();
 						login.setRole(Role.USER);
 						addPerson(login);
-						plLogger.info("New MODERATOR added successfully with id " +login.getId());
+						plLogger.info("New MODERATOR added successfully with id " + login.getId());
 
 						break;
 					case 4:
@@ -112,7 +106,8 @@ public class TestApplication {
 				}
 					break;
 				case 3: {
-					System.out.println("Update details of :  1. Admin 2. Moderator 3. User ");
+					System.out.println(
+							"Update details of :  1. Admin 2. Moderator 3. User 4. Update assessment 5.Update Activity");
 					int choice = Integer.parseInt(scanner.nextLine());
 					switch (choice) {
 					case 1:
@@ -129,6 +124,7 @@ public class TestApplication {
 							updateLastName();
 							break;
 						default:
+
 							plLogger.error("Invalid option");
 							break;
 						}
@@ -150,7 +146,7 @@ public class TestApplication {
 							break;
 
 						}
-					case 3:
+					case 3: {
 						System.out.println("Update 1. Password 2. First Name 3. Last Name");
 						choice = Integer.parseInt(scanner.nextLine());
 						switch (choice) {
@@ -169,10 +165,31 @@ public class TestApplication {
 
 						}
 					}
+						break;
+					case 4:
+						System.out.println("Enter assessment id to be updated: ");
+						Integer assessmentId = Integer.parseInt(scanner.nextLine());
+						assessment = getAssessmentById(assessmentId);
+						Assessment updatedAssessment = updateAssessment(assessment);
+						System.out.println(updatedAssessment);
+						System.out.println("Assessment updated successfully");
+						break;
+					case 5:
+						System.out.println("Enter Learning activity id to be updated:");
+						Integer activityId = Integer.parseInt(scanner.nextLine());
+						learningActivity = getLearningActivityById(activityId);
+						LearningActivity updateLearningActivity = updateLearningActivity(learningActivity);
+						System.out.println(updateLearningActivity);
+						System.out.println("Assessment updated successfully");
+						break;
+					default:
+						plLogger.error("Invalid Option");
+					}
 				}
 					break;
 				case 4: {
-					System.out.println("Delete 1. Admin 2.Moderator 3. User");
+					System.out.println(
+							"Delete 1. Admin 2.Moderator 3. User 4.Delete Learning Activity 5.Delete assessment");
 					int choice = Integer.parseInt(scanner.nextLine());
 					Integer id = 0;
 					switch (choice) {
@@ -291,7 +308,7 @@ public class TestApplication {
 					Integer activityId2 = Integer.parseInt(scanner.nextLine());
 					System.out.println("Enter file path");
 					String path = scanner.nextLine();
-					Integer status = uploadCertificate(path,userId1,activityId2);
+					Integer status = uploadCertificate(path, userId1, activityId2);
 					System.out.println(status);
 					System.out.println("Cerificate uploaded successfully");
 					break;
@@ -317,12 +334,111 @@ public class TestApplication {
 
 	}
 
+	private static LearningActivity getLearningActivityById(Integer activityId) throws ActivityException {
+		return learningActivityBoundry.searchLearningActivityById(activityId);
+
+	}
+
+	private static Assessment updateAssessment(Assessment assessment) throws AssesmentException, ParseException {
+		System.out.println(
+				"Enter 1. Update assessment name \n 2. Update assessment type\n 3. Update assessment release date\n 4. update assessment time duration");
+		Integer choice2 = Integer.parseInt(scanner.nextLine());
+		Assessment updateAssessment = new Assessment();
+		switch (choice2) {
+		case 1:
+			System.out.println("Existing name of assessment is: " + assessment.getAssesment_name());
+			System.out.println("Enter new name: ");
+			assessment.setAssesment_name(scanner.nextLine());
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
+		case 2:
+			System.out.println("Existing type of assessment is: " + assessment.getAssesment_type());
+			System.out.println("Enter new type: ");
+			assessment.setAssesment_type(scanner.nextLine());
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
+
+		case 3:
+			System.out.println("Existing release date of assessment is: " + assessment.getAssesment_release_date());
+			System.out.println("Enter new assessment release date(yyyy-mm-dd)::");
+			String strDate = scanner.nextLine();
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+			assessment.setAssesment_release_date(date1);
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
+		case 4:
+			System.out.println(
+					"Existing time duration of assessment is: " + assessment.getAssesment_time_duration() + " hours");
+			System.out.println("Enter new type: ");
+			assessment.setAssesment_time_duration(Double.parseDouble(scanner.nextLine()));
+			updateAssessment = assessmentActivivtyBoundry.updateAssessmentActivity(assessment);
+			break;
+		default:
+			plLogger.error("Invalid option");
+			break;
+		}
+		return updateAssessment;
+
+	}
+
+	private static LearningActivity updateLearningActivity(LearningActivity learningActivity)
+			throws ActivityException, ParseException {
+		System.out.println(
+				"Enter \n1. update activity name \n2.update activity link \n3.update activity level \n4.update time duration \n5.update release date");
+		Integer choice = Integer.parseInt(scanner.nextLine());
+		LearningActivity updatedActivity = new LearningActivity();
+		switch (choice) {
+		case 1:
+			System.out.println("Existing activity name is: " + learningActivity.getActivity_name());
+			System.out.println("Enter new activity name ::");
+			String name = scanner.nextLine();
+			learningActivity.setActivity_name(name);
+			updatedActivity = learningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 2:
+			System.out.println("Existing activity link is: " + learningActivity.getActivity_link());
+			System.out.println("Enter new activity link ::");
+			String link = scanner.nextLine();
+			learningActivity.setActivity_link(link);
+			updatedActivity = learningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 3:
+			System.out.println("Existing activity level is: " + learningActivity.getActivity_level());
+			System.out.println("Enter new activity level ::");
+			String level = scanner.nextLine();
+			learningActivity.setActivity_level(level);
+			updatedActivity = learningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 4:
+			System.out.println("Existing time duration is: " + learningActivity.getActivity_time() + " hours.");
+			System.out.println("Enter new duration in hours ::");
+			Double timeDuration = Double.parseDouble(scanner.nextLine());
+			learningActivity.setActivity_time(timeDuration);
+			updatedActivity = learningActivityBoundry.updateLearningActivity(learningActivity);
+			break;
+		case 5:
+			System.out.println(
+					"Existing release date of learning activity is: " + learningActivity.getActivity_realsedate());
+			System.out.println("Enter new assessment release date(yyyy-mm-dd)::");
+			String strDate = scanner.nextLine();
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+			learningActivity.setActivity_realsedate(date1);
+			updatedActivity = learningActivityBoundry.updateLearningActivity(learningActivity);
+		default:
+			plLogger.error("Invalid option");
+			break;
+		}
+		return updatedActivity;
+	}
+
 	private static Integer userRegisterToActivity(UserActivity userActivity, Integer userId, Integer activityId)
 			throws ActivityException {
 		return userActivityBoundry.userRegisterToLearningActivity(userActivity, userId, activityId);
 	}
-private static Integer uploadCertificate(String path, Integer userId1, Integer activityId2) throws ActivityException {
-		
+
+	private static Integer uploadCertificate(String path, Integer userId1, Integer activityId2)
+			throws ActivityException {
+
 		return userActivityBoundry.uploadCerificate(path, userId1, activityId2);
 	}
 
