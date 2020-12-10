@@ -106,6 +106,12 @@ public class RegisterUser {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
+
+	@Override
+	public String toString() {
+		return "RegisterUser : id=" + id + "\n firstName=" + firstName + "\n lastName=" + lastName + "\n emailId=" + emailId
+				+ "\n password=" + password + "\n role=" + role ;
+	}
 	
 	
 	

@@ -77,9 +77,9 @@ public class RegisterUserDaoImpl implements RegisterUserDao{
 			entityManager.getTransaction().begin();
 			RegisterUser login= 
 					entityManager.find(RegisterUser.class, id);
-			entityManager.remove(id);
+			entityManager.remove(login);
 			entityManager.getTransaction().commit();	
-			return login.getId();
+			return id;
 		}catch(PersistenceException e) {
 			entityManager.getTransaction().rollback();
 			throw e;
@@ -180,7 +180,7 @@ public class RegisterUserDaoImpl implements RegisterUserDao{
 		// TODO Auto-generated method stub
 		EntityManager entityManager=emf.createEntityManager();
 
-		String jql= "From LearningActivity a";
+		String jql= "From RegisterUser a";
 		try {			
 			entityManager.getTransaction().begin();
 			TypedQuery<RegisterUser> query=
