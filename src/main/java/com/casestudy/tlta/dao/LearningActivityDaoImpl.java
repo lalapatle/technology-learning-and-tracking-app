@@ -66,7 +66,6 @@ public class LearningActivityDaoImpl implements LearningActivityDao{
 		}	
 
 	}
-
 	@Override
 	public Integer deleteLearningActivity(Integer id) throws PersistenceException {
 		EntityManager entityManager=emf.createEntityManager();

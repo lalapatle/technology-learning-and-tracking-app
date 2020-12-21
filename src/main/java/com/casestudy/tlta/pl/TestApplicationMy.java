@@ -12,8 +12,8 @@ import com.casestudy.tlta.boundry.AssessmentActivityBoundry;
 import com.casestudy.tlta.boundry.AssessmentActivityBoundryImpl;
 import com.casestudy.tlta.boundry.LearningActivityBoundry;
 import com.casestudy.tlta.boundry.LearningActivityBoundryImpl;
-import com.casestudy.tlta.boundry.LoginBoundary;
-import com.casestudy.tlta.boundry.LoginBoundaryImpl;
+import com.casestudy.tlta.boundry.RegisterUserBoundary;
+import com.casestudy.tlta.boundry.RegisterUserBoundaryImpl;
 import com.casestudy.tlta.boundry.UserActivityBoundry;
 import com.casestudy.tlta.boundry.UserActivityBoundryImpl;
 import com.casestudy.tlta.entity.Assessment;
@@ -23,14 +23,14 @@ import com.casestudy.tlta.entity.Role;
 import com.casestudy.tlta.entity.UserActivity;
 import com.casestudy.tlta.exception.ActivityException;
 import com.casestudy.tlta.exception.AssesmentException;
-import com.casestudy.tlta.exception.LoginException;
+import com.casestudy.tlta.exception.RegisterUserException;
 
-public class TestApplication {
+public class TestApplicationMy {
 	private static Scanner scanner = new Scanner(System.in);
-	private static LoginBoundary loginBoundry = new LoginBoundaryImpl();
+	private static RegisterUserBoundary loginBoundry = new RegisterUserBoundaryImpl();
 	private static LearningActivityBoundry leaarningActivityBoundry = new LearningActivityBoundryImpl();
 	private static AssessmentActivityBoundry assessmentActivivtyBoundry = new AssessmentActivityBoundryImpl();
-	private static Logger plLogger = Logger.getLogger(TestApplication.class);
+	private static Logger plLogger = Logger.getLogger(TestApplicationMy.class);
 	private static UserActivityBoundry userActivityBoundry = new UserActivityBoundryImpl();
 
 	public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class TestApplication {
 		while (true) {
 			System.out.println(
 					"Enter 1.Login 2.Create(Admin/Moderator/User/Activity/Assessment/) \n3.Update(Admin/Moderator/User/Assessment/activity) \n4. Delete(Admin/Moderator/User/Assessment/activity) \n5. Search \n6. View all"
-							+ "\n 7.User can register to activity \n 8.User can upload certificate");
+							+ "\n 7.User can register to activity \n 8.User can upload certificate(not working)");
 			int option = Integer.parseInt(scanner.nextLine());
 			RegisterUser login = null;
 			Assessment assessment = null;
@@ -226,6 +226,8 @@ public class TestApplication {
 						System.out.println("Enter id to be deleted");
 						id = deleteUser(Integer.parseInt(scanner.nextLine()));
 						System.out.println("User deleted successfully.");
+						
+						
 						break;
 					case 4:
 						System.out.println("Enter learning activity id to be deleted");
@@ -267,7 +269,6 @@ public class TestApplication {
 						System.out.println("Enter the user id : ");
 						Integer userId = scanner.nextInt();
 						login = getUserById(userId);
-
 						System.out.println("User found." + login);
 						break;
 					case 4:
@@ -345,7 +346,7 @@ public class TestApplication {
 				e1.printStackTrace();
 			} catch (ParseException e2) {
 
-			} catch (LoginException e2) {
+			} catch (RegisterUserException e2) {
 
 			}
 
@@ -379,7 +380,7 @@ public class TestApplication {
 		return userActivityBoundry.userRegisterToLearningActivity(userActivity, userId, activityId);
 	}
 
-	private static RegisterUser getUserById(Integer userId) throws LoginException {
+	private static RegisterUser getUserById(Integer userId) throws RegisterUserException {
 
 		// TODO Auto-generated method stub
 		return loginBoundry.getUserById(userId);
@@ -392,7 +393,7 @@ public class TestApplication {
 
 	}
 
-	private static Integer deleteUser(Integer id) throws LoginException {
+	private static Integer deleteUser(Integer id) throws RegisterUserException {
 		return loginBoundry.deleteUser(id);
 
 	}
@@ -402,14 +403,14 @@ public class TestApplication {
 		return leaarningActivityBoundry.deleteLearningActivity(parseInt);
 	}
 
-	private static void updateLastName(RegisterUser login) throws LoginException {
+	private static void updateLastName(RegisterUser login) throws RegisterUserException {
 		System.out.println("Your last name is: " + login.getLastName());
 		System.out.println("Enter updated last name: ");
 		login.setLastName(scanner.nextLine());
 		loginBoundry.updateLastName(login);
 	}
 
-	private static void updateFirstName(RegisterUser login) throws LoginException {
+	private static void updateFirstName(RegisterUser login) throws RegisterUserException {
 		System.out.println("Your first name is: " + login.getFirstName());
 		System.out.println("Enter updated first name: ");
 		login.setFirstName(scanner.nextLine());
@@ -417,7 +418,7 @@ public class TestApplication {
 
 	}
 
-	private static void updatePassword(RegisterUser login) throws LoginException {
+	private static void updatePassword(RegisterUser login) throws RegisterUserException {
 		// System.out.println("Your password name is: "+login.getLastName());
 		System.out.println("Enter updated password: ");
 		login.setPassword(scanner.nextLine());
@@ -425,7 +426,7 @@ public class TestApplication {
 
 	}
 
-	private static void addPerson(RegisterUser login) throws LoginException {
+	private static void addPerson(RegisterUser login) throws RegisterUserException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter First name");
 		login.setFirstName(scanner.nextLine());

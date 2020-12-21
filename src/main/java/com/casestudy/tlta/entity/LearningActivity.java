@@ -48,7 +48,7 @@ public class LearningActivity implements Serializable{
 	@Column(name="activity_realsedate")
 	private Date activity_realsedate;
 	
-	@OneToOne()
+	@OneToOne
 	@JoinColumn(name="assesment_id")
 	private Assessment assesment;
 	

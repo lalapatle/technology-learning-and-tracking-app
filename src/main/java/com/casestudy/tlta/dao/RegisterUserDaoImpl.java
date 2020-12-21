@@ -1,14 +1,18 @@
 package com.casestudy.tlta.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 import com.casestudy.tlta.entity.RegisterUser;
 
-public class LoginDaoImpl implements LoginDao{
+public class RegisterUserDaoImpl implements RegisterUserDao{
 
+	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("technology-learning-and-tracking-app");
 	@Override
 	public void addUser(RegisterUser login) throws PersistenceException {
@@ -28,43 +32,6 @@ public class LoginDaoImpl implements LoginDao{
 			entityManager.close();
 		}	
 
-	}
-	@Override
-	public void addModerator(RegisterUser login) throws PersistenceException {
-		// TODO Auto-generated method stub
-		EntityManager entityManager=emf.createEntityManager();
-		try {			
-			entityManager.getTransaction().begin();
-			entityManager.persist(login);
-			entityManager.flush();
-			entityManager.getTransaction().commit();			
-		}catch(PersistenceException e) {
-			entityManager.getTransaction().rollback();
-			throw e;
-		}catch(Exception e) {
-			throw e;
-		}finally {
-			entityManager.close();
-		}	
-	}
-
-	@Override
-	public void addAdmin(RegisterUser login) throws PersistenceException {
-		// TODO Auto-generated method stub
-		EntityManager entityManager=emf.createEntityManager();
-		try {			
-			entityManager.getTransaction().begin();
-			entityManager.persist(login);
-			entityManager.flush();
-			entityManager.getTransaction().commit();			
-		}catch(PersistenceException e) {
-			entityManager.getTransaction().rollback();
-			throw e;
-		}catch(Exception e) {
-			throw e;
-		}finally {
-			entityManager.close();
-		}	
 	}
 
 	@Override
@@ -208,17 +175,62 @@ public class LoginDaoImpl implements LoginDao{
 			entityManager.close();
 		}	
 	}
-}
 
+	@Override
+	public List<RegisterUser> getAllRegisteredUser() throws PersistenceException {
+		// TODO Auto-generated method stub
+		EntityManager entityManager=emf.createEntityManager();
 
+		String jql= "From RegisterUser a";
+		try {			
+			entityManager.getTransaction().begin();
+			TypedQuery<RegisterUser> query=
+					entityManager.createQuery(jql,RegisterUser.class);
+			List<RegisterUser> userList=query.getResultList();
+			entityManager.getTransaction().commit();			
+			return userList;
+		}catch(PersistenceException e) {
+			entityManager.getTransaction().rollback();		
 
+			throw e;
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			entityManager.close();
+		}
 
+	}
 
-//public class LoginDaoImpl implements LoginDao{
-//	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("learning-and-tracking-app")	;	
-//
+	
+	
+	
+	
+	
+	
+	
+	
+//	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("technology-learning-and-tracking-app");
 //	@Override
-//	public void addUser(Login login) throws PersistenceException {
+//	public void addUser(RegisterUser login) throws PersistenceException {
+//		
+//		EntityManager entityManager=emf.createEntityManager();
+//		try {			
+//			entityManager.getTransaction().begin();
+//			entityManager.persist(login);
+//			entityManager.flush();
+//			entityManager.getTransaction().commit();			
+//		}catch(PersistenceException e) {
+//			entityManager.getTransaction().rollback();
+//			throw e;
+//		}catch(Exception e) {
+//			throw e;
+//		}finally {
+//			entityManager.close();
+//		}	
+//
+//	}
+//	@Override
+//	public void addModerator(RegisterUser login) throws PersistenceException {
 //		// TODO Auto-generated method stub
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {			
@@ -235,9 +247,9 @@ public class LoginDaoImpl implements LoginDao{
 //			entityManager.close();
 //		}	
 //	}
-//	
+//
 //	@Override
-//	public void addModerator(Login login) throws PersistenceException {
+//	public void addAdmin(RegisterUser login) throws PersistenceException {
 //		// TODO Auto-generated method stub
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {			
@@ -256,32 +268,13 @@ public class LoginDaoImpl implements LoginDao{
 //	}
 //
 //	@Override
-//	public void addAdmin(Login login) throws PersistenceException {
-//		// TODO Auto-generated method stub
-//		EntityManager entityManager=emf.createEntityManager();
-//		try {			
-//			entityManager.getTransaction().begin();
-//			entityManager.persist(login);
-//			entityManager.flush();
-//			entityManager.getTransaction().commit();			
-//		}catch(PersistenceException e) {
-//			entityManager.getTransaction().rollback();
-//			throw e;
-//		}catch(Exception e) {
-//			throw e;
-//		}finally {
-//			entityManager.close();
-//		}	
-//	}
-//
-//	@Override
-//	public Login getUserById(Integer id) throws PersistenceException {
+//	public RegisterUser getUserById(Integer id) throws PersistenceException {
 //		// TODO Auto-generated method stub
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {
 //
-//			Login login =
-//					entityManager.find(Login.class, id);			
+//			RegisterUser login =
+//					entityManager.find(RegisterUser.class, id);			
 //
 //			return login;
 //		}catch(PersistenceException e) {
@@ -291,17 +284,15 @@ public class LoginDaoImpl implements LoginDao{
 //		}finally {
 //			entityManager.close();
 //		}	
-//
 //	}
-//	
 //	@Override
-//	public Login getModeratorById(Integer id) throws PersistenceException {
-//		// TODO Auto-generated method stub
+//	public RegisterUser getModeratorById(Integer id) throws PersistenceException {
+//		
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {
 //
-//			Login login =
-//					entityManager.find(Login.class, id);			
+//			RegisterUser login =
+//					entityManager.find(RegisterUser.class, id);			
 //
 //			return login;
 //		}catch(PersistenceException e) {
@@ -312,15 +303,14 @@ public class LoginDaoImpl implements LoginDao{
 //			entityManager.close();
 //		}	
 //	}
-//	
 //	@Override
 //	public Integer deleteUser(Integer id) throws PersistenceException {
 //		// TODO Auto-generated method stub
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {
 //			entityManager.getTransaction().begin();
-//			Login login= 
-//					entityManager.find(Login.class, id);
+//			RegisterUser login= 
+//					entityManager.find(RegisterUser.class, id);
 //			entityManager.remove(id);
 //			entityManager.getTransaction().commit();	
 //			return login.getId();
@@ -335,12 +325,12 @@ public class LoginDaoImpl implements LoginDao{
 //	}
 //
 //	@Override
-//	public Login updatePassword(Login login, String firstName, String lastName) throws PersistenceException {
+//	public RegisterUser updatePassword(RegisterUser login, String firstName, String lastName) throws PersistenceException {
 //		// TODO Auto-generated method stub
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {
 //			entityManager.getTransaction().begin();
-//			Login updatePassword= 
+//			RegisterUser updatePassword= 
 //					entityManager.merge(login);			
 //			entityManager.flush();
 //			entityManager.getTransaction().commit();	
@@ -356,12 +346,12 @@ public class LoginDaoImpl implements LoginDao{
 //	}
 //
 //	@Override
-//	public Login updateFirstName(Login login) throws PersistenceException {
+//	public RegisterUser updateFirstName(RegisterUser login) throws PersistenceException {
 //		// TODO Auto-generated method stub
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {
 //			entityManager.getTransaction().begin();
-//			Login updateFirstName= 
+//			RegisterUser updateFirstName= 
 //					entityManager.merge(login);			
 //			entityManager.flush();
 //			entityManager.getTransaction().commit();	
@@ -378,12 +368,12 @@ public class LoginDaoImpl implements LoginDao{
 //	}
 //
 //	@Override
-//	public Login updateLastName(Login login) throws PersistenceException {
+//	public RegisterUser updateLastName(RegisterUser login) throws PersistenceException {
 //		// TODO Auto-generated method stub
 //		EntityManager entityManager=emf.createEntityManager();
 //		try {
 //			entityManager.getTransaction().begin();
-//			Login updateLastName= 
+//			RegisterUser updateLastName= 
 //					entityManager.merge(login);			
 //			entityManager.flush();
 //			entityManager.getTransaction().commit();	
@@ -398,4 +388,26 @@ public class LoginDaoImpl implements LoginDao{
 //		}	
 //
 //	}
-//}
+//	@Override
+//	public RegisterUser updatePassword(RegisterUser login) throws PersistenceException {
+//		// TODO Auto-generated method stub
+//		EntityManager entityManager=emf.createEntityManager();
+//		try {
+//			entityManager.getTransaction().begin();
+//			RegisterUser updatePassword= 
+//					entityManager.merge(login);			
+//			entityManager.flush();
+//			entityManager.getTransaction().commit();	
+//			return updatePassword;
+//		}catch(PersistenceException e) {
+//			entityManager.getTransaction().rollback();
+//			throw e;
+//		}catch(Exception e) {
+//			throw e;
+//		}finally {
+//			entityManager.close();
+//		}	
+//	}
+	
+	
+}

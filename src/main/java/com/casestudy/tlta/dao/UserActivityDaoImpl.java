@@ -14,8 +14,9 @@ import com.casestudy.tlta.entity.UserActivity;
 public class UserActivityDaoImpl implements UserActivityDao{
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("technology-learning-and-tracking-app");
-	private LoginDao loginDao = new LoginDaoImpl();
+	private RegisterUserDao loginDao = new RegisterUserDaoImpl();
 	private LearningActivityDao learningActivityDao = new LearningActivityDaoImpl();
+	//TODO this methode is not working
 	@Override
 	public Integer uploadCerificate(String filePath,Integer userId,Integer activityId) throws PersistenceException {
 		EntityManager em = emf.createEntityManager();
@@ -26,17 +27,17 @@ public class UserActivityDaoImpl implements UserActivityDao{
 //			UserActivity updatedUserActivity = em.merge(userActivity);
 //			em.flush();
 //			
-//			
-//			Query query = em.createQuery("UPDATE UserActivity e SET e.certificate = :filePath,e.status = :complete"
-//		              + " WHERE e.userId = :uid AND e.activityId = :aid");
-//		      query.setParameter("filePath", filePath);
-//		      query.setParameter("complete", "complete");
-//		      query.setParameter("uid", userId);
-//		      query.setParameter("aid", activityId);
-//		      int rowsUpdated = query.executeUpdate();
-//		      System.out.println("user_activity entitiy Updated: " + rowsUpdated);
-//		      em.getTransaction().commit();
-//			return rowsUpdated;
+			
+			Query query = em.createQuery("UPDATE UserActivity SET certificate = :filePath, status = :complete"
+		              + " WHERE e.userId = :uid AND e.activityId = :aid");
+		      query.setParameter("filePath", filePath);
+		      query.setParameter("complete", "complete");
+		      query.setParameter("uid", userId);
+		      query.setParameter("aid", activityId);
+		      int rowsUpdated = query.executeUpdate();
+		      System.out.println("user_activity entitiy Updated: " + rowsUpdated);
+		      em.getTransaction().commit();
+			return rowsUpdated;
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			throw e;
@@ -46,7 +47,7 @@ public class UserActivityDaoImpl implements UserActivityDao{
 			em.close();
 			
 		}
-		return 1;
+
 	}
 
 	@Override
